@@ -1,0 +1,17 @@
+{
+  "name": "Wolkenhüpfer",
+  "short_name": "Wolkenhüpfer",
+  "description": "Spring immer höher: 30 Level in 5 Welten voller Hindernisse, Sterne und Münzen.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14151a",
+  "theme_color": "#14151a",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

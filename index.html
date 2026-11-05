@@ -1,0 +1,3332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Wolkenhüpfer – Pixelhafen</title>
+<meta name="description" content="Spring immer höher: 30 Level in 5 Welten voller Hindernisse, Sterne und Münzen. Kostenlos, ohne Anmeldung, ohne Werbung.">
+<!-- App-Einstellungen, damit sich das Spiel auf dem Handy wie eine App verhält -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14151a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wolkenhüpfer">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<script>
+  // Nimmt Hell oder Dunkel von der Pixelhafen-Seite mit, falls dort etwas gewählt wurde
+  try {
+    const saved = localStorage.getItem('design');
+    if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+  } catch (error) {}
+</script>
+<style>
+  /* Schrift "Press Start 2P", Copyright 2012 The Press Start 2P Project Authors,
+     SIL Open Font License 1.1 (https://openfontlicense.org). Sie steckt direkt in dieser
+     Datei, damit das Spiel auch offline und ohne Verbindung zu Google richtig aussieht. */
+  @font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(data:font/woff2;base64,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) format('woff2');
+  }
+
+  /* Dieselben Farben wie auf der Pixelhafen-Seite */
+  :root {
+    color-scheme: dark;
+    --bg: #14151a;
+    --surface: #1c1e25;
+    --surface-2: #272a33;
+    --line: #363a46;
+    --text: #ece9e2;
+    --muted: #b1b0ae;
+    --accent: #f2b84b;
+    --accent-edge: #a9781f;
+    --on-accent: #1d1505;
+    --retro: 'Press Start 2P', 'Courier New', monospace;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      color-scheme: light;
+      --bg: #f4f0e6;
+      --surface: #fdfbf5;
+      --surface-2: #ebe6d8;
+      --line: #d4cdbb;
+      --text: #24232a;
+      --muted: #5c5a63;
+      --accent: #8a5600;
+      --accent-edge: #b58628;
+    }
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f4f0e6;
+    --surface: #fdfbf5;
+    --surface-2: #ebe6d8;
+    --line: #d4cdbb;
+    --text: #24232a;
+    --muted: #5c5a63;
+    --accent: #8a5600;
+    --accent-edge: #b58628;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; background: var(--bg); touch-action: none; }
+  body {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    color: var(--text);
+    font: 16px/1.5 var(--body);
+    -webkit-font-smoothing: antialiased;
+    /* Kein Markieren und kein Lupen-Menü beim Spielen mit dem Finger */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  [hidden] { display: none !important; }
+
+  /* Anzeige oben: Punkte, Level, nächstes Ziel, Knöpfe */
+  #hud {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 560px;
+    min-height: 56px;
+    margin: 0 auto;
+    padding: 4px 8px 4px 14px;
+  }
+  .wert { display: grid; flex: none; gap: 5px; }
+  .wert small { overflow: hidden; color: var(--muted); font: 8px/1 var(--retro); white-space: nowrap; }
+  .wert b { font: 400 13px/1 var(--retro); white-space: nowrap; }
+  #punkte { color: var(--accent); }
+  #zielBox { margin-right: auto; }
+  .knoepfchen { display: flex; flex: none; gap: 6px; }
+  .rund {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: var(--text);
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .rund:hover { background: var(--surface-2); }
+  .rund svg { width: 18px; height: 18px; }
+  #tonAus { display: none; }
+  .stumm #tonAn { display: none; }
+  .stumm #tonAus { display: block; }
+
+  /* Spielfeld: wie ein Bildschirm in der Konsole, auch im hellen Design */
+  #feld { position: relative; flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; align-items: center; }
+  canvas#bild { display: block; flex: none; background: #0a0b10; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); }
+
+  /* Fenster für Start, Pause und Ende */
+  #fenster {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    overflow-y: auto;
+    background: rgba(10, 12, 18, 0.62);
+    touch-action: pan-y;
+  }
+  .tafel {
+    width: min(420px, 100%);
+    margin: auto;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+  .marke { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; color: var(--muted); font: 9px/1.5 var(--retro); }
+  .marke svg { width: 22px; height: 22px; flex: none; color: var(--accent); }
+  h1, h2 { margin: 0; font: 400 clamp(19px, 6vw, 25px)/1.3 var(--retro); letter-spacing: -0.02em; overflow-wrap: anywhere; }
+  h2 { font-size: clamp(16px, 5vw, 21px); }
+  .unterzeile { margin: 12px 0 0; color: var(--muted); }
+  .klein { margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.4; }
+  .rekord { margin: 16px 0 0; color: var(--muted); font: 10px/1.6 var(--retro); }
+  .rekord b { color: var(--accent); font-weight: 400; }
+  .zahlen { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; }
+  .zahlen div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+  .zahlen dt { color: var(--muted); }
+  .zahlen dd { margin: 0; font: 13px/1.4 var(--retro); }
+  .hervor { margin: 16px 0 0; color: var(--accent); font: 11px/1.6 var(--retro); }
+  .knoepfe { display: grid; gap: 12px; margin-top: 20px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 10px 18px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 3px 0 var(--line);
+    font: 600 16px/1.3 var(--body);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.07); }
+  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--line); }
+  .btn.main { color: var(--on-accent); background: #f2b84b; border-color: #f2b84b; box-shadow: 0 3px 0 var(--accent-edge); }
+  .btn.main:active { box-shadow: 0 1px 0 var(--accent-edge); }
+  .paar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Schwierigkeit */
+  .stufen { display: flex; gap: 4px; margin-top: 18px; padding: 4px; background: var(--surface-2); border-radius: 14px; }
+  .stufen button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 4px;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 10px;
+    font: 600 15px/1.3 var(--body);
+    cursor: pointer;
+  }
+  .stufen button:hover { color: var(--text); }
+  .stufen button[aria-pressed="true"] { color: var(--text); background: var(--surface); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
+
+  /* Herausforderung eines Freundes */
+  #duell { margin: 16px 0 0; padding: 12px 14px; background: var(--surface-2); border-left: 4px solid #f2b84b; border-radius: 8px; line-height: 1.4; }
+  #duell strong { display: block; margin-bottom: 4px; color: var(--accent); font: 10px/1.6 var(--retro); overflow-wrap: anywhere; }
+
+  /* Levelauswahl */
+  .welt { display: flex; align-items: center; gap: 8px; margin: 16px 0 6px; color: var(--muted); font: 9px/1.5 var(--retro); }
+  .welt i { flex: none; width: 10px; height: 10px; }
+  .raster { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+  .feldchen {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 4px;
+    min-height: 50px;
+    padding: 4px 0;
+    color: var(--text);
+    cursor: pointer;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font: 11px/1 var(--retro);
+  }
+  .feldchen:hover:not(:disabled) { filter: brightness(1.1); }
+  .feldchen:disabled { color: var(--muted); cursor: default; background: transparent; opacity: 0.6; }
+  .feldchen.aktuell { border-color: #f2b84b; box-shadow: inset 0 0 0 1px #f2b84b; }
+  .ministerne { display: flex; gap: 1px; height: 8px; }
+  .ministerne svg { width: 8px; height: 8px; color: var(--line); }
+  .ministerne svg.an { color: var(--accent); }
+
+  /* Sterne nach einem Level */
+  .sterne { display: flex; gap: 10px; margin: 18px 0 0; }
+  .sterne svg { width: 40px; height: 40px; color: var(--line); }
+  .sterne svg.an { color: #f2b84b; animation: stern 0.35s ease-out backwards; }
+  .sterne svg.an:nth-child(2) { animation-delay: 0.15s; }
+  .sterne svg.an:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes stern { from { opacity: 0; transform: scale(0.3); } }
+
+  /* Figuren */
+  .figuren { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+  .figurKnopf {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    min-height: 118px;
+    padding: 10px 6px;
+    color: var(--text);
+    cursor: pointer;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font: 600 15px/1.3 var(--body);
+  }
+  .figurKnopf:hover:not(:disabled) { filter: brightness(1.08); }
+  .figurKnopf:disabled { color: var(--muted); cursor: default; background: transparent; }
+  .figurKnopf:disabled canvas { filter: grayscale(1) brightness(0.55); }
+  .figurKnopf[aria-pressed="true"] { border-color: #f2b84b; box-shadow: inset 0 0 0 1px #f2b84b; }
+  .figurKnopf canvas { width: 48px; height: 48px; image-rendering: pixelated; }
+  .figurKnopf small { display: flex; align-items: center; gap: 4px; color: var(--muted); font: 9px/1 var(--retro); }
+  .figurKnopf small svg { width: 10px; height: 10px; color: var(--accent); }
+
+  /* Rangliste */
+  #liste { display: grid; gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+  #liste li { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 4px 6px 4px 12px; background: var(--surface-2); border-radius: 10px; }
+  #liste li.ich { box-shadow: inset 0 0 0 2px #f2b84b; }
+  #liste .platz { flex: none; width: 22px; color: var(--muted); font: 10px/1 var(--retro); }
+  #liste .wer { flex: 1 1 auto; min-width: 0; overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+  #liste .wie { flex: none; font: 11px/1 var(--retro); }
+  #liste .weg { flex: none; width: 36px; height: 36px; padding: 0; color: var(--muted); cursor: pointer; background: transparent; border: 0; border-radius: 8px; font-size: 20px; line-height: 1; }
+  #liste .weg:hover { color: var(--text); background: var(--surface); }
+  #liste .platzhalter { width: 36px; flex: none; }
+
+  /* Teilen */
+  label.feldname { display: grid; gap: 6px; margin-top: 16px; font-weight: 600; }
+  input[type="text"] {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font: 16px/1.3 var(--body); /* 16px verhindert das Zoomen auf dem iPhone */
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  #teilenStatus { min-height: 24px; margin: 12px 0 0; color: var(--accent); font-weight: 600; }
+  #teilenStatus:empty { display: none; }
+
+  /* Hilfe */
+  .regeln { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.4; }
+  .regeln li { display: grid; grid-template-columns: 8px 1fr; column-gap: 10px; }
+  .regeln li::before { content: ''; width: 8px; height: 8px; margin-top: 7px; background: var(--accent); }
+  .legende { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.25; }
+  .legende li { display: flex; align-items: center; gap: 8px; }
+  .legende canvas { flex: none; width: 28px; height: 28px; }
+  .zwischen { margin: 18px 0 0; font: 10px/1.6 var(--retro); color: var(--accent); }
+
+  #dreh { display: none; color: var(--muted); font-size: 12px; line-height: 1.25; }
+
+  /* Handy quer: Anzeige wandert an den Rand, das Spielfeld bleibt so groß wie möglich */
+  @media (orientation: landscape) and (max-height: 560px) {
+    body { flex-direction: row; }
+    #hud { flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; width: 112px; max-width: none; height: 100%; margin: 0; padding: 6px 4px 6px 10px; }
+    #zielBox { margin-right: 0; }
+    #feld { align-items: center; justify-content: center; }
+    #dreh { display: block; }
+    /* Das Startfenster wird flacher, damit "Spielen" ohne Scrollen zu sehen ist */
+    .tafel { width: min(620px, 100%); padding: 16px 20px; }
+    #fStart .marke, #fStart .unterzeile, #fStart .js-stufentext { display: none; }
+    #fStart .stufen, #fStart .rekord { margin-top: 10px; }
+    #fStart .knoepfe { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    #fStart .btn.main { grid-column: 1 / -1; }
+    #fStart .paar { display: contents; }
+  }
+
+  @media (max-width: 359px) {
+    #hud { gap: 9px; padding-left: 8px; padding-right: 6px; }
+    .wert b { font-size: 11px; }
+    .rund { width: 40px; height: 44px; }
+    .tafel { padding: 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active { transform: none; }
+    .sterne svg.an { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="stern" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l3.2 6.9 7.5.9-5.5 5.2 1.4 7.5L12 18.4l-6.6 3.6 1.4-7.5L1.3 9.3l7.5-.9z"/></symbol>
+  <symbol id="logo" viewBox="0 0 11 11"><path fill="currentColor" d="M4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM4 1h1v1h-1zM6 1h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM5 3h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM5 5h1v1h-1zM0 6h1v1h-1zM5 6h1v1h-1zM10 6h1v1h-1zM0 7h1v1h-1zM1 7h1v1h-1zM5 7h1v1h-1zM9 7h1v1h-1zM10 7h1v1h-1zM0 8h1v1h-1zM5 8h1v1h-1zM10 8h1v1h-1zM1 9h1v1h-1zM2 9h1v1h-1zM5 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM3 10h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1z"/></symbol>
+</svg>
+
+<div id="hud">
+  <div class="wert"><small>PUNKTE</small><b id="punkte">0</b></div>
+  <div class="wert"><small>LEVEL</small><b id="levelAnzeige">1</b></div>
+  <div class="wert" id="zielBox"><small id="zielName">REKORD</small><b id="zielWert">0</b></div>
+  <p id="dreh" style="margin:0">Hochkant ist das Feld größer.</p>
+  <div class="knoepfchen">
+    <button class="rund" id="tonKnopf" type="button" aria-label="Ton an oder aus">
+      <svg id="tonAn" viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 5h3v6H2zM6 4h1v8H6zM7 3h1v10H7zM10 5h1v6h-1zM12 3h1v10h-1z"/></svg>
+      <svg id="tonAus" viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 5h3v6H2zM6 4h1v8H6zM7 3h1v10H7zM10 5h1v1h-1zM11 6h1v1h-1zM12 7h1v2h-1zM11 9h1v1h-1zM10 10h1v1h-1zM14 5h1v1h-1zM13 6h1v1h-1zM14 10h1v1h-1zM13 9h1v1h-1z"/></svg>
+    </button>
+    <button class="rund" id="pauseKnopf" type="button" aria-label="Pause">
+      <svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg>
+    </button>
+  </div>
+</div>
+
+<div id="feld">
+  <canvas id="bild" role="img" aria-label="Spielfeld von Wolkenhüpfer"></canvas>
+</div>
+
+<div id="fenster">
+  <div class="tafel">
+
+    <section id="fStart">
+      <p class="marke"><svg aria-hidden="true"><use href="#logo"/></svg>PIXELHAFEN</p>
+      <h1>WOLKENHÜPFER</h1>
+      <p class="unterzeile">Spring immer höher, vom Hafen bis zu den Sternen. 30 Level in 5 Welten warten auf dich.</p>
+      <div id="duell" hidden><strong id="duellTitel"></strong><span id="duellText"></span></div>
+      <div class="stufen" role="group" aria-label="Schwierigkeit"></div>
+      <p class="klein js-stufentext"></p>
+      <p class="rekord">REKORD <b class="js-rekord">0</b></p>
+      <div class="knoepfe">
+        <button class="btn main" id="losKnopf" type="button">Spielen</button>
+        <div class="paar">
+          <button class="btn" type="button" data-oeffne="fLevels">Level</button>
+          <button class="btn" type="button" data-oeffne="fFiguren">Figuren</button>
+        </div>
+        <div class="paar">
+          <button class="btn" type="button" data-oeffne="fListe">Rangliste</button>
+          <button class="btn" type="button" data-oeffne="fHilfe">So geht's</button>
+        </div>
+        <a class="btn" href="https://moje9328.github.io/spiele/">Zur Pixelhafen-Seite</a>
+      </div>
+    </section>
+
+    <section id="fLevels" hidden>
+      <h2>LEVEL WÄHLEN</h2>
+      <div class="stufen" role="group" aria-label="Schwierigkeit"></div>
+      <div id="levelListe"></div>
+      <p class="klein">Für einen hohen Highscore startest du am besten bei Level 1, denn dann sammelst du am längsten Punkte.</p>
+      <div class="knoepfe"><button class="btn" type="button" data-oeffne="fStart">Zurück</button></div>
+    </section>
+
+    <section id="fFiguren" hidden>
+      <h2>FIGUREN</h2>
+      <p class="klein" id="figurenText"></p>
+      <div class="figuren" id="figurenListe"></div>
+      <div class="knoepfe"><button class="btn" type="button" data-oeffne="fStart">Zurück</button></div>
+    </section>
+
+    <section id="fListe" hidden>
+      <h2>RANGLISTE</h2>
+      <div class="stufen" role="group" aria-label="Schwierigkeit"></div>
+      <ol id="liste"></ol>
+      <p class="klein">Schick deinen Link an Freunde. Schicken sie dir ihren zurück, stehen sie hier in deiner Liste. Alles bleibt auf deinem Gerät.</p>
+      <div class="knoepfe">
+        <button class="btn main" id="listeTeilen" type="button">Freunde herausfordern</button>
+        <button class="btn" type="button" data-oeffne="fStart">Zurück</button>
+      </div>
+    </section>
+
+    <section id="fHilfe" hidden>
+      <h2>SO GEHT'S</h2>
+      <ul class="regeln">
+        <li><strong id="hilfeSteuerung"></strong></li>
+        <li>Deine Figur springt von allein. Du lenkst nur nach links und rechts. Wer seitlich aus dem Bild läuft, kommt auf der anderen Seite wieder herein.</li>
+        <li>Erreiche die goldene Plattform mit der Fahne ganz oben, dann ist das Level geschafft.</li>
+        <li>Fällst du unten aus dem Bild oder berührst ein Hindernis, kostet das ein Herz.</li>
+        <li>Fliegende Gegner kannst du von oben plattspringen. Das gibt Punkte und Schwung.</li>
+      </ul>
+      <p class="zwischen">STERNE</p>
+      <ul class="regeln">
+        <li>In jedem Level warten 3 Sterne. Sammle sie ein, denn sie schalten neue Figuren frei.</li>
+      </ul>
+      <p class="zwischen">HILFEN</p>
+      <ul class="legende" id="legendeHilfen"></ul>
+      <p class="zwischen">HINDERNISSE</p>
+      <ul class="legende" id="legendeGefahren"></ul>
+      <p class="zwischen">DIE 5 WELTEN</p>
+      <ul class="regeln" id="weltenListe"></ul>
+      <div class="knoepfe"><button class="btn" type="button" data-oeffne="fStart">Zurück</button></div>
+    </section>
+
+    <section id="fPause" hidden>
+      <h2>PAUSE</h2>
+      <p class="rekord">PUNKTE <b id="pausePunkte">0</b></p>
+      <div class="knoepfe">
+        <button class="btn main" id="weiterKnopf" type="button">Weiterspielen</button>
+        <button class="btn" id="pauseNeu" type="button">Level neu starten</button>
+        <button class="btn" id="pauseMenue" type="button">Spiel beenden</button>
+      </div>
+    </section>
+
+    <section id="fGeschafft" hidden>
+      <h2 id="geschafftTitel">LEVEL GESCHAFFT</h2>
+      <div class="sterne" id="geschafftSterne" role="img"></div>
+      <dl class="zahlen">
+        <div><dt>Münzen</dt><dd id="gMuenzen"></dd></div>
+        <div><dt>Zeit</dt><dd id="gZeit"></dd></div>
+        <div><dt>Level-Bonus</dt><dd id="gBonus"></dd></div>
+        <div><dt>Punkte gesamt</dt><dd id="gPunkte"></dd></div>
+      </dl>
+      <p class="hervor" id="gFrei" hidden></p>
+      <p class="klein" id="gTipp"></p>
+      <div class="knoepfe">
+        <button class="btn main" id="naechstesKnopf" type="button">Weiter</button>
+        <button class="btn" id="geschafftMenue" type="button">Spiel beenden</button>
+      </div>
+    </section>
+
+    <section id="fEnde" hidden>
+      <h2>GAME OVER</h2>
+      <p class="hervor" id="neuerRekord" hidden>NEUER REKORD!</p>
+      <dl class="zahlen">
+        <div><dt>Punkte</dt><dd id="ePunkte"></dd></div>
+        <div><dt>Erreichtes Level</dt><dd id="eLevel"></dd></div>
+        <div><dt>Dein Rekord</dt><dd id="eRekord"></dd></div>
+      </dl>
+      <p class="klein" id="eDuell" hidden></p>
+      <div class="knoepfe">
+        <button class="btn main" id="nochmalKnopf" type="button">Weiter</button>
+        <button class="btn" id="neuKnopf" type="button">Neu ab Level 1</button>
+        <button class="btn" id="endeTeilen" type="button">Freunde herausfordern</button>
+        <button class="btn" type="button" data-oeffne="fStart">Zum Menü</button>
+      </div>
+    </section>
+
+    <section id="fTeilen" hidden>
+      <h2>HERAUSFORDERN</h2>
+      <p class="unterzeile" id="teilenText"></p>
+      <label class="feldname">Dein Name für den Link
+        <input type="text" id="nameFeld" maxlength="12" autocomplete="off" placeholder="zum Beispiel Sam">
+      </label>
+      <p class="klein">Dein Name, deine Punkte und dein Level stehen im Link. Mehr nicht, und du entscheidest, wem du ihn schickst.</p>
+      <p id="teilenStatus" role="status"></p>
+      <input type="text" id="linkFeld" readonly hidden aria-label="Dein Link zum Kopieren">
+      <div class="knoepfe">
+        <button class="btn main" id="teilenKnopf" type="button">Link teilen</button>
+        <button class="btn" id="teilenZurueck" type="button">Zurück</button>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+// =====================================================================
+//  HIER KANNST DU ALLES ÄNDERN
+// =====================================================================
+
+// Diese Adresse steckt in den Links, die man an Freunde schickt
+const SPIEL_ADRESSE = 'https://moje9328.github.io/wolkenhuepfer/';
+
+// Die drei Schwierigkeiten.
+// herzen = Leben, breite = Plattformen mal, gefahr = Hindernisse mal, luecke = Abstände mal, faktor = Punkte mal
+const STUFEN = {
+  leicht: { name: 'Leicht', herzen: 5, breite: 1.2, gefahr: 0.55, luecke: 0.88, faktor: 1, text: '5 Herzen, breite Plattformen und weniger Hindernisse.' },
+  normal: { name: 'Normal', herzen: 3, breite: 1, gefahr: 1, luecke: 1, faktor: 1.5, text: '3 Herzen und 1,5-fache Punkte.' },
+  profi: { name: 'Profi', herzen: 3, breite: 0.84, gefahr: 1.4, luecke: 1.08, faktor: 2, text: '3 Herzen, schmale Plattformen, viele Hindernisse und doppelte Punkte.' }
+};
+
+// Die fünf Welten, jede mit eigenem Aussehen und einer eigenen Besonderheit.
+// schwere = Schwerkraft mal, griff = wie schnell die Figur reagiert, wind = Windstärke
+const WELTEN = [
+  {
+    name: 'MORGENHAFEN', farbe: '#f2925b', schwere: 1, griff: 1, wind: 0, flut: 'Die Flut',
+    text: 'Bei Sonnenaufgang geht es vom Hafen aus los. Hier lernst du alles in Ruhe.',
+    himmelUnten: ['#ffd08a', '#fff0c8'], himmelMitte: ['#ff9b7a', '#a4d6f2'], himmelOben: ['#6a4f9c', '#5aa3e8'],
+    flutFarbe: '#2a9fc9', flutHell: '#8fe3f2'
+  },
+  {
+    name: 'NEONSTADT', farbe: '#d83bb0', schwere: 1, griff: 1, wind: 0, flut: 'Die Säure',
+    text: 'Eine Stadt bei Nacht. Plattformen blinken, Laser schalten sich an und aus.',
+    himmelUnten: ['#6a1c86', '#3e1470'], himmelMitte: ['#2f1466', '#1f0f54'], himmelOben: ['#140c3a', '#0b0824'],
+    flutFarbe: '#39d98a', flutHell: '#c2ffdd'
+  },
+  {
+    name: 'WOLKENREICH', farbe: '#5fb4f2', schwere: 1, griff: 1, wind: 1, flut: 'Das Gewitter',
+    text: 'Hoch über den Wolken zerren Windböen an dir. Achte auf die Streifen in der Luft.',
+    himmelUnten: ['#c7f0ff', '#e2f8ff'], himmelMitte: ['#79c8f7', '#5fb4f2'], himmelOben: ['#3f8ae0', '#2563c4'],
+    flutFarbe: '#46436e', flutHell: '#b2adf2'
+  },
+  {
+    name: 'EISGIPFEL', farbe: '#25d6c8', schwere: 1, griff: 0.55, wind: 0, flut: 'Die Lawine',
+    text: 'Auf dem Eis rutschst du nach. Lenke früh und pass auf fallende Eiszapfen auf.',
+    himmelUnten: ['#2b7f92', '#1f5f7c'], himmelMitte: ['#14456a', '#0f2d55'], himmelOben: ['#0a2345', '#061332'],
+    flutFarbe: '#e4f6ff', flutHell: '#ffffff'
+  },
+  {
+    name: 'STERNENMEER', farbe: '#a56bff', schwere: 0.74, griff: 0.8, wind: 0, flut: 'Der Nebel',
+    text: 'Im All ist alles leichter, du schwebst länger. Dafür kommen Meteore von oben.',
+    himmelUnten: ['#2b1158', '#160a38'], himmelMitte: ['#180a36', '#0e0726'], himmelOben: ['#08061a', '#05040f'],
+    flutFarbe: '#8c33d8', flutHell: '#e7b6ff'
+  }
+];
+
+// Die Level. So liest du eine Zeile:
+//   name     = Name des Levels       hoehe  = wie hoch bis zur Fahne
+//   luecke   = Abstand der Plattformen, 0.5 eng bis 1 weit   breite = Plattformbreite
+//   muster   = welche Wege die Plattformen bilden, siehe MUSTER unten
+//   bewegt, broeckel, blink = Anteil dieser Plattformen, 0 bis 1
+//   gegner, stachel, laser  = Anzahl pro 1000 Höhe
+//   faller   = alle wie viele Sekunden etwas von oben fällt (0 = nie)
+//   flut     = wie schnell die Gefahr von unten steigt (0 = gar nicht)
+//   feder, rakete, schild, magnet, herz = so viele Hilfen im ganzen Level
+const LEVEL = [
+  // Welt 1: Morgenhafen
+  { name: 'Erster Sprung', hoehe: 2000, luecke: 0.55, breite: 84, muster: ['zickzack'], feder: 2, schild: 0 },
+  { name: 'Am Kai', hoehe: 2400, luecke: 0.6, breite: 80, muster: ['welle'], bewegt: 0.15, feder: 2, gegner: 0.5 },
+  { name: 'Morgenmöwen', hoehe: 2800, luecke: 0.65, breite: 76, muster: ['zickzack', 'treppe'], bewegt: 0.15, gegner: 1.3, feder: 2, schild: 1 },
+  { name: 'Morsche Stege', hoehe: 3000, luecke: 0.68, breite: 74, muster: ['treppe', 'saeulen'], broeckel: 0.3, gegner: 1, feder: 2, magnet: 1 },
+  { name: 'Springflut', hoehe: 3000, luecke: 0.65, breite: 76, muster: ['welle', 'zickzack'], bewegt: 0.2, flut: 60, feder: 2, rakete: 1, herz: 1 },
+  { name: 'Leuchtturm', hoehe: 3600, luecke: 0.72, breite: 72, muster: ['saeulen', 'treppe', 'welle'], bewegt: 0.25, broeckel: 0.2, gegner: 1.4, stachel: 0.7, feder: 2, rakete: 1, schild: 1 },
+
+  // Welt 2: Neonstadt
+  { name: 'Nachtschicht', hoehe: 3000, luecke: 0.66, breite: 74, muster: ['treppe'], blink: 0.2, gegner: 0.8, feder: 2, schild: 1 },
+  { name: 'Reklamewald', hoehe: 3400, luecke: 0.7, breite: 72, muster: ['saeulen', 'zickzack'], blink: 0.3, gegner: 1, stachel: 0.5, feder: 2, magnet: 1 },
+  { name: 'Lasertor', hoehe: 3600, luecke: 0.7, breite: 72, muster: ['welle'], bewegt: 0.2, laser: 1, gegner: 0.8, feder: 2, schild: 1 },
+  { name: 'Drohnenschwarm', hoehe: 3800, luecke: 0.72, breite: 70, muster: ['zickzack', 'saeulen'], bewegt: 0.25, blink: 0.2, gegner: 2.2, feder: 3, rakete: 1, herz: 1 },
+  { name: 'Säurebad', hoehe: 3600, luecke: 0.72, breite: 70, muster: ['treppe', 'welle'], blink: 0.25, flut: 72, laser: 0.5, feder: 2, rakete: 1, schild: 1 },
+  { name: 'Der Wolkenkratzer', hoehe: 4400, luecke: 0.76, breite: 68, muster: ['saeulen', 'treppe', 'zickzack'], bewegt: 0.2, blink: 0.3, broeckel: 0.15, gegner: 1.5, stachel: 0.8, laser: 0.9, feder: 3, rakete: 1, schild: 1 },
+
+  // Welt 3: Wolkenreich
+  { name: 'Über den Wolken', hoehe: 3400, luecke: 0.72, breite: 72, muster: ['welle'], broeckel: 0.25, gegner: 0.8, feder: 2, schild: 1 },
+  { name: 'Böiger Tag', hoehe: 3800, luecke: 0.74, breite: 70, muster: ['zickzack', 'inseln'], bewegt: 0.2, broeckel: 0.25, gegner: 1, feder: 2, magnet: 1 },
+  { name: 'Himmelsinseln', hoehe: 4000, luecke: 0.76, breite: 68, muster: ['inseln', 'saeulen'], bewegt: 0.3, stachel: 1, gegner: 1, feder: 3, rakete: 1 },
+  { name: 'Blitzfeld', hoehe: 4200, luecke: 0.76, breite: 68, muster: ['treppe', 'inseln'], broeckel: 0.3, stachel: 1.8, gegner: 1, feder: 3, schild: 1, herz: 1 },
+  { name: 'Gewitterfront', hoehe: 4000, luecke: 0.76, breite: 68, muster: ['welle', 'inseln'], bewegt: 0.25, flut: 82, stachel: 0.8, feder: 3, rakete: 1, schild: 1 },
+  { name: 'Das Auge des Sturms', hoehe: 4800, luecke: 0.8, breite: 66, muster: ['inseln', 'zickzack', 'saeulen'], bewegt: 0.3, broeckel: 0.3, stachel: 1.3, gegner: 1.6, feder: 3, rakete: 1, schild: 1 },
+
+  // Welt 4: Eisgipfel
+  { name: 'Erster Schnee', hoehe: 3600, luecke: 0.72, breite: 72, muster: ['zickzack'], bewegt: 0.1, faller: 7, gegner: 0.6, feder: 2, schild: 1 },
+  { name: 'Rutschpartie', hoehe: 4000, luecke: 0.74, breite: 70, muster: ['treppe', 'welle'], bewegt: 0.2, broeckel: 0.2, faller: 6, gegner: 0.8, feder: 3, magnet: 1 },
+  { name: 'Eiszapfenhöhle', hoehe: 4200, luecke: 0.76, breite: 68, muster: ['saeulen'], faller: 3.6, stachel: 1, feder: 3, rakete: 1, schild: 1 },
+  { name: 'Gletscherspalte', hoehe: 4400, luecke: 0.78, breite: 66, muster: ['saeulen', 'inseln'], broeckel: 0.35, bewegt: 0.2, faller: 5, gegner: 1.2, feder: 3, herz: 1 },
+  { name: 'Lawine', hoehe: 4200, luecke: 0.76, breite: 68, muster: ['zickzack', 'treppe'], bewegt: 0.2, flut: 88, faller: 7, feder: 3, rakete: 1, schild: 1 },
+  { name: 'Der Gipfel', hoehe: 5200, luecke: 0.82, breite: 64, muster: ['inseln', 'treppe', 'saeulen'], bewegt: 0.25, broeckel: 0.3, stachel: 1.2, gegner: 1.5, faller: 4.5, feder: 3, rakete: 1, schild: 1 },
+
+  // Welt 5: Sternenmeer
+  { name: 'Schwerelos', hoehe: 4200, luecke: 0.74, breite: 68, muster: ['welle'], bewegt: 0.25, gegner: 1, feder: 2, schild: 1 },
+  { name: 'Asteroidengürtel', hoehe: 4600, luecke: 0.76, breite: 64, muster: ['inseln', 'zickzack'], bewegt: 0.3, broeckel: 0.3, stachel: 1.5, feder: 3, magnet: 1 },
+  { name: 'Sternschnuppen', hoehe: 4800, luecke: 0.78, breite: 64, muster: ['treppe', 'inseln'], bewegt: 0.3, faller: 3.4, gegner: 1, feder: 3, rakete: 1, schild: 1 },
+  { name: 'Plasmagitter', hoehe: 5000, luecke: 0.78, breite: 62, muster: ['saeulen', 'welle'], blink: 0.3, laser: 1.3, gegner: 1, feder: 3, schild: 1, herz: 1 },
+  { name: 'Dunkler Nebel', hoehe: 4800, luecke: 0.8, breite: 62, muster: ['inseln', 'treppe'], bewegt: 0.3, flut: 94, faller: 6, stachel: 1, feder: 3, rakete: 2, schild: 1 },
+  { name: 'Ganz oben', hoehe: 6000, luecke: 0.84, breite: 60, muster: ['zickzack', 'inseln', 'saeulen', 'treppe'], bewegt: 0.3, blink: 0.2, broeckel: 0.25, stachel: 1.3, gegner: 1.8, laser: 0.8, faller: 5, feder: 4, rakete: 2, schild: 2, herz: 1 }
+];
+
+// Die Hilfen zum Einsammeln. dauer = Sekunden
+const HILFEN = {
+  feder: { name: 'FEDER', text: 'Federt dich hoch' },
+  rakete: { name: 'RAKETE', text: 'Trägt dich nach oben', dauer: 1.9 },
+  schild: { name: 'SCHILD', text: 'Schützt vor einem Treffer' },
+  magnet: { name: 'MAGNET', text: 'Zieht Münzen an', dauer: 9 },
+  herz: { name: '+1 HERZ', text: 'Ein Herz dazu' }
+};
+
+// Die Figuren. sterne = so viele Sterne braucht man, um sie freizuschalten
+const FIGUREN = {
+  pip: { name: 'Pip', sterne: 0 },
+  krabbe: { name: 'Knips', sterne: 12 },
+  astro: { name: 'Astro', sterne: 35 },
+  geist: { name: 'Blitz', sterne: 65 }
+};
+
+// Pixelbilder der Figuren: Jedes Zeichen ist ein Pixel, die Farben stehen in farben.
+// Augen (e) und Pupillen (s) schauen automatisch in Laufrichtung.
+const FIGUR_BILDER = {
+  pip: {
+    farben: { a: '#3fc1a8', b: '#2a8f8a', c: '#b7f2df', w: '#f6f4ea', s: '#1a1a2a', g: '#f2b84b', d: '#1b5f66' },
+    bild: [
+      '......gg........',
+      '.......g........',
+      '...aaaaaaaaaa...',
+      '..accccaaaaaab..',
+      '.acaaaaaaaaaabb.',
+      '.aaawwwaawwwabb.',
+      '.aaawsswawssabb.',
+      '.aaawsswawssabb.',
+      '.aaaaaaaaaaaabb.',
+      '.aaaaassssaaabb.',
+      '.baaaaaaaaaabbb.',
+      '..bbbbbbbbbbbb..',
+      '...dd......dd...',
+      '...dd......dd...',
+      '..ggg......ggg..',
+      '................'
+    ]
+  },
+  krabbe: {
+    farben: { a: '#f2603f', b: '#b83a2c', c: '#ffa488', w: '#f6f4ea', s: '#1a1a2a', d: '#8c2a22' },
+    bild: [
+      '................',
+      '.aa..........aa.',
+      'aca..........aca',
+      'aaa..w....w..aaa',
+      '.aa.wss..wss.aa.',
+      '..a.wss..wss.a..',
+      '..aaaaaaaaaaaa..',
+      '.accccaaaaaaaab.',
+      '.acaaaaaaaaaaab.',
+      '.aaaaaaaaaaaaab.',
+      '.aaaasaaaasaaab.',
+      '..aaaassssaaab..',
+      '...bbbbbbbbbb...',
+      '.dd.dd....dd.dd.',
+      'd..d..d..d..d..d',
+      '................'
+    ]
+  },
+  astro: {
+    farben: { a: '#eeeef5', b: '#aeb2c8', c: '#ffffff', v: '#22325e', h: '#6fb9ff', r: '#e5384f', d: '#6f7490' },
+    bild: [
+      '....aaaaaaaa....',
+      '...acccaaaaab...',
+      '..acaaaaaaaabb..',
+      '..aavvvvvvvvab..',
+      '..aavhhvvvvvab..',
+      '..aavhvvvvvvab..',
+      '..aavvvvvvvvab..',
+      '..baaaaaaaaabb..',
+      '...bbbbbbbbbb...',
+      '.bbaaarraaaabbb.',
+      '.aa.aarraaab.ab.',
+      '.ba.aaaaaaab.bb.',
+      '....aaabbaab....',
+      '....dd....dd....',
+      '...ddd....ddd...',
+      '................'
+    ]
+  },
+  geist: {
+    farben: { a: '#ffd34a', b: '#e89a1e', c: '#fff4b0', w: '#2a1a0a', s: '#2a1a0a', r: '#ff6a55', d: '#b56d10' },
+    bild: [
+      '..a.........a...',
+      '..aa.......aa...',
+      '..aaa.....aaa...',
+      '..aaaaaaaaaaa...',
+      '.aaccaaaaaaaab..',
+      '.acaaaaaaaaaab..',
+      '.aaawwaaawwaab..',
+      '.aaawsaaawsaab..',
+      '.araaaaaaaaarb..',
+      '.aaaawwwwaaaab..',
+      '.baaaaaaaaaabb..',
+      '..bbbbbbbbbbb...',
+      '...dd.....dd....',
+      '...dd.....dd....',
+      '..ddd.....ddd...',
+      '................'
+    ]
+  }
+};
+
+// =====================================================================
+//  AB HIER MUSST DU NORMALERWEISE NICHTS MEHR ÄNDERN
+// =====================================================================
+
+const SPEICHER = 'wolkenhuepfer-daten';
+const B = 360;                               // Spielfeld-Breite in eigenen Einheiten, auf jedem Gerät gleich
+const H_MIN = 560, H_MAX = 720;              // Die Höhe passt sich dem Bildschirm an
+let H = 640;
+const TAKT = 1 / 120;                        // Feine Rechenschritte, damit niemand durch Plattformen rutscht
+const SCHWERE = 1500, SPRUNG = 760, FEDER_SPRUNG = 1180, RETTUNG_SPRUNG = 1120;
+const TEMPO_MAX = 310, BESCHLEUNIGUNG = 2600, BREMSE = 2200;
+const P_B = 22, P_H = 26;                    // Treffer-Fläche der Figur (etwas kleiner als das Bild)
+const PLATTE_H = 14;
+const HERZEN_MAX = 6, EXTRA_ALLE = 20000;
+const STUFEN_NAMEN = Object.keys(STUFEN);
+
+const wenigBewegung = matchMedia('(prefers-reduced-motion: reduce)');
+const $ = id => document.getElementById(id);
+const zahl = n => Math.round(n).toLocaleString('de-DE');
+const begrenzt = (wert, min, max) => Math.max(min, Math.min(max, wert));
+const zahlKurz = n => (n >= 1000000 ? (n / 1000000).toFixed(2).replace('.', ',') + 'M' : zahl(n));   // Für die enge Anzeige oben
+const zeitText = sek => Math.floor(sek / 60) + ':' + String(Math.floor(sek % 60)).padStart(2, '0');
+const grossName = name => name.toLocaleUpperCase('de-DE');
+
+// Würfel mit fester Reihenfolge: Dasselbe Level sieht bei jedem Versuch gleich aus
+function wuerfel(startwert) {
+  let a = startwert >>> 0;
+  const zufall = () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  zufall.von = (min, max) => min + zufall() * (max - min);
+  zufall.wahl = liste => liste[Math.floor(zufall() * liste.length)];
+  return zufall;
+}
+
+// --------------------------- Speichern ---------------------------
+
+function leererFortschritt() { return { frei: 1, rekord: 0, rekordLevel: 0, sterne: {} }; }
+
+function ladeDaten() {
+  const leer = { name: '', stufe: 'normal', ton: true, figur: 'pip', freunde: [], fortschritt: {} };
+  let roh = null;
+  try { roh = JSON.parse(localStorage.getItem(SPEICHER)); } catch (error) {}
+  const d = Object.assign(leer, roh && typeof roh === 'object' ? roh : {});
+  if (!STUFEN[d.stufe]) d.stufe = 'normal';
+  if (!Array.isArray(d.freunde)) d.freunde = [];
+  if (!d.fortschritt || typeof d.fortschritt !== 'object') d.fortschritt = {};
+  for (const stufe of STUFEN_NAMEN) {
+    d.fortschritt[stufe] = Object.assign(leererFortschritt(), d.fortschritt[stufe]);
+  }
+  return d;
+}
+
+const daten = ladeDaten();
+function speichere() {
+  try { localStorage.setItem(SPEICHER, JSON.stringify(daten)); } catch (error) {}
+}
+const fortschritt = () => daten.fortschritt[daten.stufe];
+
+// Sterne zählen über alle Schwierigkeiten: pro Level zählt das beste Ergebnis
+function sterneGesamt() {
+  const bestes = {};
+  for (const stufe of STUFEN_NAMEN) {
+    for (const [nr, anzahl] of Object.entries(daten.fortschritt[stufe].sterne)) {
+      bestes[nr] = Math.max(bestes[nr] || 0, anzahl);
+    }
+  }
+  return Object.values(bestes).reduce((summe, n) => summe + n, 0);
+}
+
+// --------------------------- Ton ---------------------------
+
+const ton = {
+  ctx: null,
+  an() {
+    if (!this.ctx) {
+      const AudioClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioClass) this.ctx = new AudioClass();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume().catch(() => {});
+  },
+  piep(frequenz, dauer, lautstaerke = 0.05, art = 'square', start = 0, ziel = 0) {
+    if (!daten.ton || !this.ctx || this.ctx.state !== 'running') return;
+    const jetzt = this.ctx.currentTime + start;
+    const osc = this.ctx.createOscillator();
+    const hull = this.ctx.createGain();
+    osc.type = art;
+    osc.frequency.setValueAtTime(frequenz, jetzt);
+    if (ziel) osc.frequency.exponentialRampToValueAtTime(ziel, jetzt + dauer);
+    hull.gain.setValueAtTime(lautstaerke, jetzt);
+    hull.gain.exponentialRampToValueAtTime(0.0008, jetzt + dauer);
+    osc.connect(hull).connect(this.ctx.destination);
+    osc.start(jetzt);
+    osc.stop(jetzt + dauer + 0.02);
+  },
+  sprung() { this.piep(260, 0.11, 0.035, 'square', 0, 560); },
+  feder() { this.piep(180, 0.3, 0.06, 'square', 0, 1100); this.piep(360, 0.26, 0.025, 'triangle', 0.02, 1500); },
+  broeckel() { this.piep(170, 0.14, 0.05, 'sawtooth', 0, 70); },
+  muenze(kette) { const f = 988 * Math.pow(2, Math.min(kette, 12) / 12); this.piep(f, 0.05, 0.028, 'square'); this.piep(f * 1.335, 0.1, 0.028, 'square', 0.05); },
+  stern() { [784, 988, 1175, 1568].forEach((f, i) => this.piep(f, 0.12, 0.05, 'square', i * 0.06)); },
+  stampf(kette) { this.piep(320 + kette * 60, 0.09, 0.06, 'square', 0, 120); this.piep(640 + kette * 60, 0.1, 0.03, 'triangle', 0.06, 900); },
+  treffer() { this.piep(220, 0.26, 0.09, 'sawtooth', 0, 60); this.piep(110, 0.2, 0.06, 'square', 0.02, 45); },
+  schild() { this.piep(880, 0.16, 0.05, 'triangle', 0, 330); },
+  fall() { this.piep(820, 0.5, 0.05, 'square', 0, 90); },
+  rettung() { [330, 494, 659].forEach((f, i) => this.piep(f, 0.09, 0.05, 'triangle', i * 0.06)); },
+  rakete() { this.piep(90, 1.7, 0.07, 'sawtooth', 0, 340); this.piep(180, 1.7, 0.03, 'square', 0, 620); },
+  hilfe() { [523, 659, 784].forEach((f, i) => this.piep(f, 0.09, 0.05, 'square', i * 0.07)); },
+  warnung() { this.piep(1320, 0.05, 0.02, 'square'); this.piep(1320, 0.05, 0.02, 'square', 0.1); },
+  verloren() { [392, 330, 262, 196].forEach((f, i) => this.piep(f, 0.17, 0.06, 'square', i * 0.12)); },
+  geschafft() { [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => this.piep(f, 0.13, 0.055, 'square', i * 0.09)); },
+  ueberholt() { [659, 880, 1175].forEach((f, i) => this.piep(f, 0.12, 0.06, 'triangle', i * 0.08)); }
+};
+
+// --------------------------- Level bauen ---------------------------
+
+const kartenIndex = nr => (nr - 1) % LEVEL.length;
+const weltIndex = nr => Math.floor(kartenIndex(nr) / 6) % WELTEN.length;
+const welt = nr => WELTEN[weltIndex(nr)];
+const runde = nr => Math.floor((nr - 1) / LEVEL.length);   // Nach Level 30 geht es von vorn weiter, nur härter
+
+// Wie hoch und wie weit die Figur in dieser Welt kommt
+function sprungDaten(w) {
+  const g = SCHWERE * w.schwere;
+  const v = SPRUNG * (w.schwere < 1 ? 0.88 : 1);
+  return { g, v, feder: FEDER_SPRUNG * (w.schwere < 1 ? 0.88 : 1), hoehe: v * v / (2 * g) };
+}
+
+// Die Muster: Sie sagen, wo die nächste Plattform auf dem Hauptweg liegt.
+// Sie liefern x-Werte, bleiben aber immer in Sprungweite der letzten Plattform.
+const MUSTER = {
+  zickzack(i, r, alt) { return alt < B / 2 ? r.von(B * 0.56, B * 0.86) : r.von(B * 0.14, B * 0.44); },
+  treppe(i, r, alt, zustand) {
+    const x = alt + zustand.richtung * r.von(62, 98);
+    if (x < 44 || x > B - 44) { zustand.richtung *= -1; return alt + zustand.richtung * r.von(62, 98); }
+    return x;
+  },
+  welle(i) { return B / 2 + Math.sin(i * 0.62) * (B * 0.34); },
+  saeulen(i, r) { return i % 2 ? B * 0.2 + r.von(-14, 14) : B * 0.8 + r.von(-14, 14); },
+  inseln(i, r, alt) {
+    const x = r.von(40, B - 40);
+    return Math.abs(x - alt) < 56 ? (x + B * 0.42) % (B - 80) + 40 : x;
+  }
+};
+
+function baueLevel(nr, stufeName) {
+  const def = LEVEL[kartenIndex(nr)];
+  const w = welt(nr);
+  const stufe = STUFEN[stufeName];
+  const r = wuerfel(nr * 7919 + STUFEN_NAMEN.indexOf(stufeName) * 104729 + 17);
+  const sprung = sprungDaten(w);
+  const haerte = 1 + runde(nr) * 0.18;
+  const zielY = -def.hoehe;
+  const gr = {
+    w, def, zielY,
+    plattformen: [], muenzen: [], sterne: [], hilfen: [], gegner: [], stacheln: [], laser: [],
+    muenzenGesamt: 0,
+    fallerAlle: def.faller ? def.faller / (stufe.gefahr * haerte) : 0,
+    flut: (def.flut || 0) * (0.88 + stufe.gefahr * 0.12) * Math.min(haerte, 1.35)
+  };
+
+  // Der Boden am Start reicht über die ganze Breite
+  gr.plattformen.push({ typ: 'boden', x: B / 2, y: 0, b: B + 80, startX: B / 2 });
+
+  // Hauptweg: Von Plattform zu Plattform ist es immer machbar
+  const muster = def.muster;
+  const abschnitt = Math.max(500, def.hoehe / muster.length);
+  const grundBreite = begrenzt(def.breite * stufe.breite / Math.min(haerte, 1.2), 46, 100);
+  const hauptweg = [];
+  const zustand = { richtung: r() < 0.5 ? 1 : -1 };
+  let y = -Math.max(70, sprung.hoehe * 0.5);
+  let x = B / 2;
+  let i = 0;
+  let broeckelInFolge = 0;
+  let letzterSchritt = -y;
+  while (y > zielY + 70) {
+    const hoehe = -y;
+    const name = muster[Math.min(muster.length - 1, Math.floor(hoehe / abschnitt))];
+    let neuX = MUSTER[name](i, r, x, zustand);
+    const breite = grundBreite * r.von(0.9, 1.1);
+    // Je höher der Sprung nach oben geht, desto weniger Zeit bleibt zur Seite: Das setzt die Grenze.
+    const wurzel = Math.sqrt(Math.max(0, sprung.v * sprung.v - 2 * sprung.g * (letzterSchritt + 20)));
+    const flugzeit = (sprung.v + wurzel) / sprung.g;
+    const weite = 0.72 * (flugzeit - 0.12) * TEMPO_MAX * (0.5 + 0.5 * w.griff) + breite / 2;
+    neuX = begrenzt(neuX, x - weite, x + weite);
+    neuX = begrenzt(neuX, breite / 2 + 4, B - breite / 2 - 4);
+    const platte = { typ: 'normal', x: neuX, y, b: breite, startX: neuX, phase: r() * 6.28, haupt: true };
+    const wurf = r();
+    const bewegt = def.bewegt || 0, broeckel = def.broeckel || 0;
+    if (wurf < bewegt) {
+      platte.typ = 'bewegt';
+      platte.hub = r.von(36, Math.min(96, B / 2 - breite / 2 - 8));
+      platte.tempo = r.von(0.9, 1.5) * (0.9 + stufe.gefahr * 0.1);
+      platte.startX = begrenzt(neuX, breite / 2 + platte.hub + 4, B - breite / 2 - platte.hub - 4);
+      platte.x = platte.startX;
+    } else if (wurf < bewegt + broeckel && broeckelInFolge < 1) {
+      platte.typ = 'broeckel';
+    }
+    broeckelInFolge = platte.typ === 'broeckel' ? broeckelInFolge + 1 : 0;
+    gr.plattformen.push(platte);
+    hauptweg.push(platte);
+    x = platte.x;
+    i++;
+    // Der Abstand wächst nach oben hin ein wenig und bleibt immer unter der Sprunghöhe
+    const luecke = (def.luecke * stufe.luecke) * (0.9 + 0.2 * (hoehe / def.hoehe));
+    const schrittY = begrenzt(sprung.hoehe * luecke * r.von(0.72, 1.06), 56, sprung.hoehe * 0.8);
+    y -= schrittY;
+    letzterSchritt = schrittY;
+  }
+
+  // Die letzte Plattform muss immer in Sprungweite der Ziel-Plattform liegen
+  const letzte = hauptweg[hauptweg.length - 1];
+  if (letzte.y - zielY > sprung.hoehe * 0.8) {
+    const breite = grundBreite;
+    const mitteX = begrenzt(B - letzte.x, breite / 2 + 4, B - breite / 2 - 4);
+    const platte = { typ: 'normal', x: mitteX, y: (letzte.y + zielY) / 2, b: breite, startX: mitteX, phase: 0, haupt: true };
+    gr.plattformen.push(platte);
+    hauptweg.push(platte);
+  }
+
+  // Zusätzliche Plattformen auf anderen Wegen, damit es sich nicht wie eine Schiene anfühlt
+  const extraAnteil = begrenzt(1.05 - def.luecke, 0.2, 0.55);
+  for (const haupt of hauptweg) {
+    if (r() > extraAnteil) continue;
+    const breite = grundBreite * r.von(0.72, 0.95);
+    const seite = haupt.x < B / 2 ? 1 : -1;
+    const ex = begrenzt(haupt.x + seite * r.von(100, 190), breite / 2 + 4, B - breite / 2 - 4);
+    const platte = { typ: 'normal', x: ex, y: haupt.y - r.von(16, 52), b: breite, startX: ex, phase: r() * 6.28 };
+    const wurf = r();
+    if (wurf < (def.blink || 0) * 1.6) {
+      platte.typ = 'blink';
+      platte.takt = r.von(1.9, 2.6);
+    } else if (wurf < (def.blink || 0) * 1.6 + (def.broeckel || 0)) {
+      platte.typ = 'broeckel';
+    }
+    gr.plattformen.push(platte);
+  }
+  // In Neon-Leveln werden auch einige Plattformen des Hauptwegs zu Blinkern, mit längerer Sichtbarkeit
+  if (def.blink) {
+    hauptweg.forEach((p, n) => {
+      if (p.typ === 'normal' && n > 2 && r() < def.blink * 0.5) {
+        p.typ = 'blink';
+        p.takt = r.von(2.6, 3.2);
+        p.lang = true;
+      }
+    });
+  }
+
+  // Die Ziel-Plattform: so breit, dass man sie nicht verfehlen kann
+  gr.plattformen.push({ typ: 'ziel', x: B / 2, y: zielY, b: B + 80, startX: B / 2 });
+
+  const feste = hauptweg.filter(p => p.typ === 'normal');
+  const nimmPlatte = (von, bis) => {
+    const passend = feste.filter(p => !p.belegt && -p.y > def.hoehe * von && -p.y < def.hoehe * bis);
+    if (!passend.length) return null;
+    const p = r.wahl(passend);
+    p.belegt = true;
+    return p;
+  };
+
+  // Hilfen liegen auf festen Plattformen, gleichmäßig über das Level verteilt
+  const leg = (typ, anzahl) => {
+    for (let n = 0; n < anzahl; n++) {
+      const von = 0.08 + 0.84 * (n / anzahl);
+      const p = nimmPlatte(von, von + 0.84 / anzahl);
+      if (!p) continue;
+      if (typ === 'feder') p.feder = { dx: r.von(-0.28, 0.28) * p.b, gestaucht: 0 };
+      else gr.hilfen.push({ typ, x: p.x, y: p.y - 26, phase: r() * 6.28 });
+    }
+  };
+  for (const typ of Object.keys(HILFEN)) leg(typ, def[typ] || 0);
+
+  // Die 3 Sterne: etwas abseits, aber immer in Reichweite
+  const anteile = [0.27, 0.58, 0.88];
+  for (const anteil of anteile) {
+    const zielHoehe = def.hoehe * anteil;
+    const nahe = hauptweg.reduce((best, p) => (Math.abs(-p.y - zielHoehe) < Math.abs(-best.y - zielHoehe) ? p : best), hauptweg[0]);
+    const seite = nahe.x < B / 2 ? 1 : -1;
+    gr.sterne.push({ x: begrenzt(nahe.x + seite * r.von(70, 120), 28, B - 28), y: nahe.y - sprung.hoehe * r.von(0.55, 0.8), phase: r() * 6.28 });
+  }
+
+  // Münzen: Bögen und Reihen, die den Weg zeigen
+  const muenze = (mx, my) => { gr.muenzen.push({ x: begrenzt(mx, 16, B - 16), y: my, startY: my, phase: r() * 6.28 }); };
+  for (let n = 1; n < hauptweg.length - 1; n++) {
+    const p = hauptweg[n], q = hauptweg[n + 1];
+    const wurf = r();
+    if (wurf < 0.26) {
+      for (let k = 1; k <= 3; k++) muenze(p.x + (q.x - p.x) * (k / 4), p.y + (q.y - p.y) * (k / 4) - 12);
+    } else if (wurf < 0.44) {
+      for (let k = 0; k < 4; k++) muenze(p.x, p.y - 34 - k * 26);
+    } else if (wurf < 0.54) {
+      for (let k = -2; k <= 2; k++) muenze(p.x + k * 22, p.y - 86 + Math.abs(k) * 12);
+    }
+  }
+  gr.muenzenGesamt = gr.muenzen.length;
+
+  // Hindernisse: nie direkt am Start und nicht kurz vor dem Ziel.
+  const pro1000 = (wert) => Math.round((wert || 0) * (def.hoehe / 1000) * stufe.gefahr * haerte);
+  const freiePosition = (mindest) => {
+    for (let versuch = 0; versuch < 30; versuch++) {
+      const hy = -r.von(460, def.hoehe - 260);
+      const hx = r.von(30, B - 30);
+      const zuNah = hauptweg.some(p => hy < p.y + 62 && hy > p.y - 170 && Math.abs(p.x - hx) < p.b / 2 + mindest)
+        || gr.sterne.some(st => Math.hypot(st.x - hx, st.y - hy) < 56)
+        || gr.stacheln.some(st => Math.hypot(st.x - hx, st.y - hy) < 150);
+      if (!zuNah) return { x: hx, y: hy };
+    }
+    return null;
+  };
+
+  const anzahlGegner = pro1000((def.gegner || 0) + runde(nr) * 0.7);
+  for (let n = 0; n < anzahlGegner; n++) {
+    const py = -r.von(420, def.hoehe - 220);
+    const breiteBahn = r.von(90, 150);
+    const mitte = r.von(breiteBahn + 16, B - breiteBahn - 16);
+    gr.gegner.push({
+      x: mitte, y: py, mitte, bahn: breiteBahn,
+      tempo: r.von(0.9, 1.5) * (0.85 + stufe.gefahr * 0.15) * Math.min(haerte, 1.3),
+      phase: r() * 6.28, r: 15, weg: false
+    });
+  }
+  const anzahlStachel = pro1000((def.stachel || 0) + runde(nr) * 0.5);
+  for (let n = 0; n < anzahlStachel; n++) {
+    const ort = freiePosition(40);
+    if (ort) gr.stacheln.push({ x: ort.x, y: ort.y, r: 14, phase: r() * 6.28 });
+  }
+  const anzahlLaser = pro1000(def.laser);
+  for (let n = 0; n < anzahlLaser; n++) {
+    const ly = -((n + 0.6) / anzahlLaser) * (def.hoehe - 500) - 300;
+    const links = r() < 0.5;
+    const laenge = r.von(B * 0.46, B * 0.62);
+    gr.laser.push({
+      y: ly, x1: links ? 0 : B - laenge, x2: links ? laenge : B,
+      phase: r() * 3, takt: r.von(2.8, 3.6), anteil: 0.45, links, an: false
+    });
+  }
+  return gr;
+}
+
+// --------------------------- Spielzustand ---------------------------
+
+let s = neuerZustand(1);
+let modus = 'menue';                         // menue, lauf, fenster
+
+function neuerZustand(startLevel) {
+  const stufe = STUFEN[daten.stufe];
+  return {
+    stufe, startLevel,
+    level: startLevel,
+    punkte: 0,
+    herzen: stufe.herzen,
+    naechstesExtra: EXTRA_ALLE,
+    rekordAmStart: fortschritt().rekord,
+    gemeldet: new Set(),
+    gr: null,
+    p: null,
+    plattformen: [], muenzen: [], sterne: [], hilfen: [], gegner: [], stacheln: [], laser: [],
+    faller: [], warnungen: [], funken: [], texte: [], streifen: [], feuerwerk: [],
+    kamera: 0, maxHoehe: 0, flutY: 400, fallerUhr: 0, fallerAlle: 0,
+    zeit: 0, levelZeit: 0,
+    sterneHier: 0, muenzenHier: 0, kette: 0, muenzKette: 0, muenzUhr: 0,
+    schild: false, magnet: 0, wind: 0,
+    abschluss: null, meldung: null, wackeln: 0, intro: 2.2,
+    bonusText: 0, neuFrei: []
+  };
+}
+
+function ladeLevel(nr) {
+  s.level = nr;
+  const gr = baueLevel(nr, daten.stufe);
+  s.gr = gr;
+  s.plattformen = gr.plattformen.map(p => ({ ...p }));
+  s.muenzen = gr.muenzen.map(m => ({ ...m }));
+  s.sterne = gr.sterne.map(m => ({ ...m }));
+  s.hilfen = gr.hilfen.map(m => ({ ...m }));
+  s.gegner = gr.gegner.map(m => ({ ...m }));
+  s.stacheln = gr.stacheln.map(m => ({ ...m }));
+  s.laser = gr.laser.map(m => ({ ...m }));
+  s.faller = [];
+  s.warnungen = [];
+  s.funken = [];
+  s.texte = [];
+  s.streifen = [];
+  s.feuerwerk = [];
+  s.kamera = -H + 60;
+  s.maxHoehe = 0;
+  s.fallerUhr = 3;
+  s.fallerAlle = gr.fallerAlle;
+  s.flutY = 300;
+  s.levelZeit = 0;
+  s.sterneHier = 0;
+  s.muenzenHier = 0;
+  s.kette = 0;
+  s.muenzKette = 0;
+  s.magnet = 0;
+  s.abschluss = null;
+  s.meldung = null;
+  s.intro = 2.2;
+  s.bonusText = 0;
+  s.neuFrei = [];
+  const sprung = sprungDaten(gr.w);
+  s.sprung = sprung;
+  s.p = {
+    x: B / 2, y: -P_H / 2 - 2, vx: 0, vy: -sprung.v,
+    blick: 1, stauch: 0, schutz: 0, rakete: 0, kipp: 0, dreh: 0, tot: false, spur: []
+  };
+  hintergrundCache = null;
+}
+
+function punkteDazu(wert) {
+  s.punkte += Math.round(wert * s.stufe.faktor);
+  while (s.punkte >= s.naechstesExtra) {
+    s.naechstesExtra += EXTRA_ALLE;
+    if (s.herzen < HERZEN_MAX) {
+      s.herzen++;
+      melde('+1 HERZ');
+      ton.hilfe();
+    }
+  }
+  // Einen Freund überholt? Das wird einmal gefeiert.
+  for (const f of daten.freunde) {
+    if (f.stufe === daten.stufe && s.punkte > f.punkte && !s.gemeldet.has(f.name)) {
+      s.gemeldet.add(f.name);
+      melde(grossName(f.name) + ' ÜBERHOLT!');
+      ton.ueberholt();
+    }
+  }
+}
+
+function melde(text) { s.meldung = { text, zeit: 1.6 }; }
+function schwebeText(text, x, y, farbe = '#ffffff') { if (s.texte.length < 12) s.texte.push({ text, x, y, farbe, zeit: 0.9 }); }
+
+function funkenBei(x, y, farbe, anzahl, kraft = 110) {
+  const menge = wenigBewegung.matches ? Math.ceil(anzahl / 3) : anzahl;
+  for (let i = 0; i < menge && s.funken.length < 160; i++) {
+    const winkel = Math.random() * Math.PI * 2;
+    const tempo = Math.random() * kraft;
+    s.funken.push({ x, y, vx: Math.cos(winkel) * tempo, vy: Math.sin(winkel) * tempo - 30, zeit: 0.3 + Math.random() * 0.4, farbe, g: 2 + Math.random() * 2.5 });
+  }
+}
+
+// --------------------------- Ein Rechenschritt ---------------------------
+
+function plattformDa(p) {
+  if (p.typ === 'blink') return blinkZustand(p) > 0;
+  return !p.weg;
+}
+
+// 1 = sichtbar, zwischen 0 und 1 = gleich weg, 0 = aus
+function blinkZustand(p) {
+  const anteilAn = p.lang ? 0.72 : 0.6;
+  const t = ((s.zeit + p.phase) % p.takt) / p.takt;
+  if (t > anteilAn) return 0;
+  return t > anteilAn - 0.14 ? 0.5 : 1;
+}
+
+function lenkung(p, dt) {
+  const griff = s.gr.w.griff;
+  let ziel = 0;
+  if (tasten.links) ziel -= 1;
+  if (tasten.rechts) ziel += 1;
+  if (finger.length) ziel = finger[finger.length - 1].richtung;
+  else if (mausX !== null && !tasten.links && !tasten.rechts) {
+    const abstand = mausX - p.x;
+    ziel = Math.abs(abstand) < 4 ? 0 : begrenzt(abstand / 34, -1, 1);
+  }
+  const wunsch = ziel * TEMPO_MAX;
+  const schub = (ziel !== 0 ? BESCHLEUNIGUNG : BREMSE) * griff;
+  if (p.vx < wunsch) p.vx = Math.min(wunsch, p.vx + schub * dt);
+  else if (p.vx > wunsch) p.vx = Math.max(wunsch, p.vx - schub * dt);
+  if (ziel !== 0) p.blick = ziel > 0 ? 1 : -1;
+}
+
+function schritt(dt) {
+  s.zeit += dt;
+  if (s.meldung) { s.meldung.zeit -= dt; if (s.meldung.zeit <= 0) s.meldung = null; }
+  s.wackeln = Math.max(0, s.wackeln - dt);
+  s.intro = Math.max(0, s.intro - dt);
+  bewegeEffekte(dt);
+  bewegeWelt(dt);
+
+  if (s.abschluss) {
+    s.abschluss.zeit -= dt;
+    if (s.abschluss.art === 'ziel') feierZiel(dt);
+    if (s.abschluss.art === 'ende') { s.p.vy += s.sprung.g * dt; s.p.y += s.p.vy * dt; s.p.dreh += 8 * dt; }
+    if (s.abschluss.zeit <= 0) {
+      const art = s.abschluss.art;
+      s.abschluss = null;
+      if (art === 'ziel') zeigeGeschafft();
+      else zeigeEnde();
+    }
+    return;
+  }
+
+  s.levelZeit += dt;
+  const p = s.p;
+  p.schutz = Math.max(0, p.schutz - dt);
+  p.stauch = Math.max(0, p.stauch - dt * 5);
+  s.magnet = Math.max(0, s.magnet - dt);
+  s.muenzUhr -= dt;
+  if (s.muenzUhr <= 0) s.muenzKette = 0;
+
+  lenkung(p, dt);
+
+  // Wind im Wolkenreich: langsam wechselnde Böen
+  s.wind = s.gr.w.wind ? Math.sin(s.zeit * 0.55) * 0.75 + Math.sin(s.zeit * 1.37) * 0.25 : 0;
+  if (s.wind) p.vx += s.wind * 240 * s.gr.w.wind * dt;
+
+  // Rakete: trägt die Figur nach oben, aber nie durch das Ziel hindurch
+  if (p.rakete > 0) {
+    p.rakete -= dt;
+    const unterZiel = p.y - s.gr.zielY;
+    p.vy = unterZiel < 240 ? Math.max(p.vy, -s.sprung.v * 0.7) : -1020;
+    if (unterZiel < 240) p.rakete = Math.min(p.rakete, 0.05);
+    if (Math.random() < 0.5) {
+      s.funken.push({ x: p.x + (Math.random() - 0.5) * 8, y: p.y + P_H / 2, vx: (Math.random() - 0.5) * 50, vy: 180 + Math.random() * 120, zeit: 0.35, farbe: Math.random() < 0.5 ? '#ffb347' : '#ff6a3c', g: 3 });
+    }
+    if (p.rakete <= 0) p.schutz = Math.max(p.schutz, 0.8);
+  } else {
+    p.vy += s.sprung.g * dt;
+  }
+
+  const fussVorher = p.y + P_H / 2;
+  p.x += p.vx * dt;
+  p.y += p.vy * dt;
+  if (p.x < -P_B) p.x += B + 2 * P_B;
+  if (p.x > B + P_B) p.x -= B + 2 * P_B;
+
+  if (p.vy > 0 && p.rakete <= 0) pruefeLandung(p, fussVorher);
+  if (s.abschluss) return;
+
+  // Kamera folgt nur nach oben. Die Figur soll oben noch Platz zum Schauen haben.
+  const zielKamera = p.y - H * 0.42;
+  if (zielKamera < s.kamera) s.kamera += (zielKamera - s.kamera) * Math.min(1, dt * 11);
+  s.kamera = Math.max(s.kamera, s.gr.zielY - H * 0.36);
+
+  const hoehe = -p.y;
+  if (hoehe > s.maxHoehe) {
+    const dazu = Math.floor(hoehe / 10) - Math.floor(s.maxHoehe / 10);
+    if (dazu > 0) punkteDazu(dazu);
+    s.maxHoehe = hoehe;
+  }
+
+  sammeln(p, dt);
+  pruefeGefahren(p);
+  if (s.abschluss) return;
+
+  // Die steigende Gefahr. Sie bleibt nie zu weit zurück, damit sie Druck macht.
+  if (s.gr.flut) {
+    s.flutY -= s.gr.flut * dt;
+    s.flutY = Math.min(s.flutY, s.kamera + H + 170);
+    if (p.y + P_H / 2 > s.flutY + 8) { verliereHerz('flut'); return; }
+  }
+
+  if (p.y - P_H > s.kamera + H) verliereHerz('fall');
+}
+
+function pruefeLandung(p, fussVorher) {
+  const fuss = p.y + P_H / 2;
+  for (const pl of s.plattformen) {
+    if (!plattformDa(pl)) continue;
+    const oben = pl.y - PLATTE_H / 2;
+    if (fussVorher > oben + 1 || fuss < oben) continue;
+    const halb = pl.b / 2 + P_B * 0.45;
+    if (Math.abs(p.x - pl.x) > halb) continue;
+    lande(p, pl, oben);
+    return;
+  }
+}
+
+function lande(p, pl, oben) {
+  p.y = oben - P_H / 2;
+  p.stauch = 1;
+  s.kette = 0;
+  if (pl.typ === 'ziel') {
+    p.vy = -s.sprung.v * 0.6;
+    p.vx = 0;
+    levelFertig();
+    return;
+  }
+  // Federn nur, wenn die Figur wirklich auf der Feder aufkommt
+  if (pl.feder && Math.abs(p.x - (pl.x + pl.feder.dx)) < 18) {
+    pl.feder.gestaucht = 1;
+    p.vy = -s.sprung.feder;
+    ton.feder();
+    funkenBei(p.x, oben, '#ffe28a', 8, 90);
+    return;
+  }
+  p.vy = -s.sprung.v;
+  if (pl.typ === 'broeckel') {
+    pl.weg = true;
+    pl.wiederUhr = 3.2;           // Sie wächst wieder nach, sonst könnte man unten festhängen
+    ton.broeckel();
+    funkenBei(pl.x, pl.y, s.gr.w.farbe, 14, 120);
+    s.funken.push(...Array.from({ length: 4 }, (_, i) => ({ x: pl.x + (i - 1.5) * pl.b / 4, y: pl.y, vx: (i - 1.5) * 24, vy: 40, zeit: 0.6, farbe: broeckelFarbe(), g: 6 })));
+  } else {
+    ton.sprung();
+  }
+}
+
+function broeckelFarbe() { return ['#8a5a36', '#7a3cff', '#d8e0ee', '#9fe6f2', '#7a7a92'][weltIndex(s.level)]; }
+
+function sammeln(p, dt) {
+  // Münzen
+  const reichweite = s.magnet > 0 ? 130 : 24;
+  for (const m of s.muenzen) {
+    if (m.weg) continue;
+    const dx = p.x - m.x, dy = p.y - m.y;
+    const abstand = Math.hypot(dx, dy);
+    if (s.magnet > 0 && abstand < reichweite) {
+      m.x += dx / abstand * 480 * dt;
+      m.y += dy / abstand * 480 * dt;
+    }
+    if (abstand < 24) {
+      m.weg = true;
+      s.muenzenHier++;
+      s.muenzKette = Math.min(s.muenzKette + 1, 12);
+      s.muenzUhr = 1.1;
+      punkteDazu(25);
+      ton.muenze(s.muenzKette);
+      funkenBei(m.x, m.y, '#ffd34a', 4, 70);
+    }
+  }
+  // Sterne
+  for (const st of s.sterne) {
+    if (st.weg) continue;
+    if (Math.hypot(p.x - st.x, p.y - st.y) < 30) {
+      st.weg = true;
+      s.sterneHier++;
+      punkteDazu(500);
+      ton.stern();
+      funkenBei(st.x, st.y, '#ffe28a', 22, 170);
+      schwebeText('STERN ' + s.sterneHier + '/3', st.x, st.y - 8, '#ffe28a');
+    }
+  }
+  // Hilfen
+  for (const h of s.hilfen) {
+    if (h.weg) continue;
+    if (Math.abs(p.x - h.x) < 26 && Math.abs(p.y - h.y) < 28) {
+      h.weg = true;
+      nimmHilfe(h.typ, p);
+    }
+  }
+}
+
+function nimmHilfe(typ, p) {
+  const def = HILFEN[typ];
+  melde(def.name);
+  funkenBei(p.x, p.y, '#ffffff', 14, 140);
+  punkteDazu(100);
+  if (typ === 'rakete') { p.rakete = def.dauer; p.vy = -1020; ton.rakete(); return; }
+  ton.hilfe();
+  if (typ === 'schild') s.schild = true;
+  if (typ === 'magnet') s.magnet = def.dauer;
+  if (typ === 'herz') {
+    if (s.herzen < HERZEN_MAX) s.herzen++;
+    else punkteDazu(500);
+  }
+}
+
+// Bewegt alles, was sich auch ohne die Figur bewegt
+function bewegeWelt(dt) {
+  const zeit = s.zeit;
+  for (const pl of s.plattformen) {
+    if (pl.typ === 'bewegt') pl.x = pl.startX + Math.sin(zeit * pl.tempo + pl.phase) * pl.hub;
+    if (pl.feder && pl.feder.gestaucht > 0) pl.feder.gestaucht = Math.max(0, pl.feder.gestaucht - dt * 4);
+    if (pl.wiederUhr > 0) {
+      pl.wiederUhr -= dt;
+      if (pl.wiederUhr <= 0) { pl.weg = false; pl.neuUhr = 0.35; }
+    }
+    if (pl.neuUhr > 0) pl.neuUhr -= dt;
+  }
+  for (const g of s.gegner) {
+    if (g.weg) { g.fall = (g.fall || 0) + dt; g.y += (120 + g.fall * 900) * dt; continue; }
+    const alt = g.x;
+    g.x = g.mitte + Math.sin(zeit * g.tempo + g.phase) * g.bahn;
+    g.blick = g.x >= alt ? 1 : -1;
+  }
+  for (const l of s.laser) {
+    const t = ((zeit + l.phase) % l.takt) / l.takt;
+    const warAn = l.an;
+    l.warnt = t > 1 - l.anteil - 0.16 && t <= 1 - l.anteil;
+    l.an = t > 1 - l.anteil;
+    if (l.an && !warAn && Math.abs(l.y - s.p.y) < H) ton.piep(1400, 0.05, 0.012, 'square');
+  }
+
+  // Dinge fallen von oben, mit Warnzeichen am oberen Rand
+  if (s.fallerAlle && !s.abschluss && s.kamera > s.gr.zielY) {
+    s.fallerUhr -= dt;
+    if (s.fallerUhr <= 0) {
+      s.fallerUhr = s.fallerAlle * (0.75 + Math.random() * 0.5);
+      const zielX = begrenzt(s.p.x + (Math.random() - 0.5) * 140, 24, B - 24);
+      s.warnungen.push({ x: zielX, zeit: 1.05 });
+      ton.warnung();
+    }
+  }
+  for (const w of s.warnungen) {
+    w.zeit -= dt;
+    if (w.zeit <= 0) s.faller.push({ x: w.x, y: s.kamera - 30, vy: 330, dreh: 0 });
+  }
+  s.warnungen = s.warnungen.filter(w => w.zeit > 0);
+  for (const f of s.faller) {
+    f.vy += 240 * dt;
+    f.y += f.vy * dt;
+    f.dreh += dt * 3;
+  }
+  s.faller = s.faller.filter(f => f.y < s.kamera + H + 60);
+}
+
+function bewegeEffekte(dt) {
+  for (const f of s.funken) {
+    f.zeit -= dt;
+    f.x += f.vx * dt;
+    f.y += f.vy * dt;
+    f.vy += 320 * dt;
+  }
+  s.funken = s.funken.filter(f => f.zeit > 0);
+  for (const t of s.texte) { t.zeit -= dt; t.y -= 34 * dt; }
+  s.texte = s.texte.filter(t => t.zeit > 0);
+  for (const f of s.feuerwerk) f.uhr -= dt;
+}
+
+function pruefeGefahren(p) {
+  if (p.rakete > 0) {
+    // Mit der Rakete fliegt man einfach durch Gegner durch und räumt sie ab
+    for (const g of s.gegner) {
+      if (!g.weg && Math.hypot(p.x - g.x, p.y - g.y) < g.r + 16) stampfe(g, p, false);
+    }
+    return;
+  }
+  for (const g of s.gegner) {
+    if (g.weg) continue;
+    const dx = Math.abs(p.x - g.x), dy = p.y - g.y;
+    if (dx > g.r + P_B / 2 - 2 || Math.abs(dy) > g.r + P_H / 2 - 3) continue;
+    // Von oben heißt: fällt und die Füße sind noch über der Mitte des Gegners
+    if (p.vy > 0 && p.y + P_H * 0.1 < g.y) { stampfe(g, p, true); continue; }
+    if (p.schutz <= 0) { getroffen(p); if (s.abschluss) return; }
+  }
+  if (p.schutz > 0) return;
+  for (const st of s.stacheln) {
+    if (Math.hypot(p.x - st.x, p.y - st.y) < st.r + 11) { getroffen(p); return; }
+  }
+  for (const l of s.laser) {
+    if (l.an && Math.abs(p.y - l.y) < P_H / 2 + 2 && p.x > l.x1 - P_B / 2 && p.x < l.x2 + P_B / 2) { getroffen(p); return; }
+  }
+  for (const f of s.faller) {
+    if (Math.abs(p.x - f.x) < 15 && Math.abs(p.y - f.y) < 20) { getroffen(p); return; }
+  }
+}
+
+function stampfe(g, p, sprung) {
+  g.weg = true;
+  s.kette++;
+  const wert = 150 * Math.min(s.kette, 5);
+  punkteDazu(wert);
+  schwebeText('+' + zahl(wert * s.stufe.faktor), g.x, g.y - 12, '#ffe28a');
+  ton.stampf(s.kette);
+  funkenBei(g.x, g.y, '#ffffff', 12, 140);
+  if (sprung) {
+    p.vy = -s.sprung.v * 1.06;
+    p.stauch = 1;
+  }
+}
+
+function getroffen(p) {
+  if (s.schild) {
+    s.schild = false;
+    p.schutz = 1.2;
+    ton.schild();
+    funkenBei(p.x, p.y, '#8fe3f2', 18, 160);
+    melde('SCHILD WEG');
+    return;
+  }
+  verliereHerz('treffer');
+}
+
+function verliereHerz(grund) {
+  const p = s.p;
+  s.herzen--;
+  s.wackeln = 0.4;
+  if (grund === 'treffer') {
+    ton.treffer();
+    funkenBei(p.x, p.y, '#ff6a55', 18, 170);
+  } else {
+    ton.fall();
+  }
+  if (s.herzen <= 0) {
+    s.herzen = 0;
+    p.tot = true;
+    p.vy = -520;
+    ton.verloren();
+    s.abschluss = { art: 'ende', zeit: 1.3 };
+    return;
+  }
+  if (grund === 'treffer') {
+    // Ein Treffer wirft die Figur nur zurück. Sie fällt, bleibt aber im Spiel.
+    p.schutz = 1.8;
+    p.vy = Math.max(p.vy, 80);
+    p.vx *= -0.5;
+    return;
+  }
+  // Abgestürzt oder von unten erwischt: Eine Rettungsblase bringt die Figur zurück.
+  const unten = s.kamera + H;
+  p.x = begrenzt(p.x, 40, B - 40);
+  p.y = unten - 8;
+  p.vy = -RETTUNG_SPRUNG * (s.gr.w.schwere < 1 ? 0.88 : 1);
+  p.vx = 0;
+  p.rakete = 0;
+  p.schutz = 2.6;
+  if (s.gr.flut) s.flutY = Math.max(s.flutY, unten + 170);
+  // Die Gefahr soll einen nicht direkt wieder treffen: Hindernisse, die vorbeifallen, verschwinden
+  s.faller = [];
+  s.warnungen = [];
+  ton.rettung();
+  funkenBei(p.x, unten - 10, '#bdf2ff', 26, 220);
+  melde(s.herzen === 1 ? 'LETZTES HERZ!' : 'NOCH ' + s.herzen + ' HERZEN');
+}
+
+function levelFertig() {
+  const nr = s.level;
+  const bonus = 1000 + 150 * kartenIndex(nr);
+  s.bonusText = Math.round(bonus * s.stufe.faktor);
+  punkteDazu(bonus);
+  const f = fortschritt();
+  const figurenVorher = freieFiguren();
+  f.frei = Math.max(f.frei, Math.min(nr + 1, LEVEL.length));
+  if (nr <= LEVEL.length) f.sterne[nr] = Math.max(f.sterne[nr] || 0, s.sterneHier);
+  merkeRekord();
+  speichere();
+  s.neuFrei = freieFiguren().filter(name => !figurenVorher.includes(name));
+  ton.geschafft();
+  s.abschluss = { art: 'ziel', zeit: 1.8 };
+  s.feuerwerk = [];
+  funkenBei(s.p.x, s.gr.zielY, '#ffe28a', 40, 240);
+}
+
+function feierZiel(dt) {
+  // Die Figur hüpft auf der Ziel-Plattform, darüber gibt es Feuerwerk
+  const p = s.p;
+  p.vy += s.sprung.g * dt;
+  p.y += p.vy * dt;
+  const oben = s.gr.zielY - PLATTE_H / 2;
+  if (p.y + P_H / 2 > oben) { p.y = oben - P_H / 2; p.vy = -s.sprung.v * 0.6; p.stauch = 1; }
+  if (!wenigBewegung.matches && Math.random() < dt * 5) {
+    const farbe = ['#ffd34a', '#ff6a9a', '#7fe3ff', '#a0ff8a'][Math.floor(Math.random() * 4)];
+    funkenBei(Math.random() * B, s.kamera + 70 + Math.random() * 180, farbe, 26, 180);
+  }
+}
+
+function merkeRekord() {
+  const f = fortschritt();
+  if (s.punkte > f.rekord) {
+    f.rekord = s.punkte;
+    f.rekordLevel = s.level;
+    speichere();
+  }
+}
+
+function freieFiguren() {
+  const sterne = sterneGesamt();
+  return Object.keys(FIGUREN).filter(name => sterne >= FIGUREN[name].sterne);
+}
+
+// --------------------------- Zeichnen ---------------------------
+
+const bild = $('bild');
+const pinsel = bild.getContext('2d');
+let massstab = 1, dichte = 1;
+const figuren = new Map();                   // Gemalte Bilder, einmal erstellt und dann nur noch kopiert
+let hintergrundCache = null;
+
+function figur(schluessel, breite, hoehe, malen) {
+  let bildchen = figuren.get(schluessel);
+  if (!bildchen) {
+    bildchen = document.createElement('canvas');
+    const faktor = massstab * dichte;
+    bildchen.width = Math.max(1, Math.ceil(breite * faktor));
+    bildchen.height = Math.max(1, Math.ceil(hoehe * faktor));
+    const c = bildchen.getContext('2d');
+    c.scale(faktor, faktor);
+    malen(c);
+    figuren.set(schluessel, bildchen);
+  }
+  return bildchen;
+}
+
+function mische(farbe, ziel, anteil) {
+  const teile = f => [parseInt(f.slice(1, 3), 16), parseInt(f.slice(3, 5), 16), parseInt(f.slice(5, 7), 16)];
+  const a = teile(farbe), b = teile(ziel);
+  return '#' + a.map((wert, i) => Math.round(wert + (b[i] - wert) * anteil).toString(16).padStart(2, '0')).join('');
+}
+
+function eckig(c, x, y, b, h, r) {
+  c.beginPath();
+  c.roundRect(x, y, b, h, r);
+}
+
+// Pixelbild aus Textzeilen in ein kleines Canvas malen
+function pixelBild(zeilen, farben, spiegel = false) {
+  const leinwand = document.createElement('canvas');
+  leinwand.width = zeilen[0].length;
+  leinwand.height = zeilen.length;
+  const c = leinwand.getContext('2d');
+  zeilen.forEach((zeile, y) => {
+    Array.from(zeile).forEach((zeichen, x) => {
+      if (zeichen === '.' || !farben[zeichen]) return;
+      c.fillStyle = farben[zeichen];
+      c.fillRect(spiegel ? zeile.length - 1 - x : x, y, 1, 1);
+    });
+  });
+  return leinwand;
+}
+
+const pixelCache = new Map();
+function figurBild(name, spiegel) {
+  const schluessel = name + (spiegel ? '-s' : '');
+  if (!pixelCache.has(schluessel)) {
+    const def = FIGUR_BILDER[name];
+    pixelCache.set(schluessel, pixelBild(def.bild, def.farben, spiegel));
+  }
+  return pixelCache.get(schluessel);
+}
+
+// --- Plattformen in fünf Stilen ---
+
+function malPlattformBild(c, weltNr, typ, b, h) {
+  // Das Bild ist etwas größer als die Plattform, damit Schein und Verzierung Platz haben
+  const x = 8, y = 8;
+  switch (weltNr) {
+    case 0: malHolz(c, typ, x, y, b, h); break;
+    case 1: malNeon(c, typ, x, y, b, h); break;
+    case 2: malWolke(c, typ, x, y, b, h); break;
+    case 3: malEis(c, typ, x, y, b, h); break;
+    default: malFels(c, typ, x, y, b, h); break;
+  }
+}
+
+function malHolz(c, typ, x, y, b, h) {
+  const grund = typ === 'broeckel' ? '#9c6b43' : typ === 'bewegt' ? '#3e8fb0' : typ === 'blink' ? '#d8a23a' : '#b5794a';
+  const hell = mische(grund, '#ffffff', 0.32), dunkel = mische(grund, '#1a0f08', 0.42);
+  c.fillStyle = dunkel;
+  eckig(c, x, y + 2, b, h, 4); c.fill();
+  c.fillStyle = grund;
+  eckig(c, x, y, b, h - 2, 4); c.fill();
+  c.fillStyle = hell;
+  c.fillRect(x + 3, y + 1, b - 6, 2);
+  c.fillStyle = dunkel;
+  const bretter = Math.max(2, Math.round(b / 18));
+  for (let i = 1; i < bretter; i++) c.fillRect(x + (b * i) / bretter, y + 1, 1.5, h - 4);
+  if (typ === 'broeckel') {
+    c.fillStyle = '#2a1608';
+    c.fillRect(x + b * 0.3, y, 2, h - 2);
+    c.fillRect(x + b * 0.3 + 2, y + 5, 3, 2);
+    c.fillRect(x + b * 0.7, y + 2, 2, h - 4);
+    c.fillRect(x + b * 0.7 - 3, y + 7, 3, 2);
+  }
+  if (typ === 'bewegt') {
+    // Rettungsring-Streifen: Diese Planke treibt
+    c.fillStyle = '#f6f4ea';
+    c.fillRect(x + 6, y + 4, 8, h - 8);
+    c.fillRect(x + b - 14, y + 4, 8, h - 8);
+    c.fillStyle = '#e5384f';
+    c.fillRect(x + 8, y + 4, 4, h - 8);
+    c.fillRect(x + b - 12, y + 4, 4, h - 8);
+  }
+}
+
+function malNeon(c, typ, x, y, b, h) {
+  const farbe = typ === 'broeckel' ? '#ff5d73' : typ === 'bewegt' ? '#3fe0ff' : typ === 'blink' ? '#ffe24a' : '#ff3fc6';
+  c.save();
+  c.shadowColor = farbe;
+  c.shadowBlur = 8;
+  c.fillStyle = '#120a26';
+  eckig(c, x, y, b, h - 1, 4); c.fill();
+  c.strokeStyle = farbe;
+  c.lineWidth = 2;
+  eckig(c, x + 1, y + 1, b - 2, h - 3, 3); c.stroke();
+  c.restore();
+  c.fillStyle = mische(farbe, '#ffffff', 0.5);
+  c.fillRect(x + 6, y + 3, b - 12, 1.5);
+  c.fillStyle = farbe;
+  if (typ === 'broeckel') {
+    for (let i = 0; i < 4; i++) c.fillRect(x + 8 + i * (b - 22) / 3, y + 7, 6, 2);
+  } else {
+    for (let i = 8; i < b - 8; i += 9) c.fillRect(x + i, y + 7, 3, 2);
+  }
+}
+
+function malWolke(c, typ, x, y, b, h) {
+  const grund = typ === 'broeckel' ? '#c3cbe0' : typ === 'bewegt' ? '#ffe7a8' : typ === 'blink' ? '#c5f6d8' : '#ffffff';
+  const schatten = mische(grund, '#6f8fc8', 0.45);
+  const puste = (farbe, dy) => {
+    c.fillStyle = farbe;
+    const zahlBaelle = Math.max(3, Math.round(b / 15));
+    eckig(c, x, y + 3 + dy, b, h - 3, 6); c.fill();
+    for (let i = 0; i < zahlBaelle; i++) {
+      const mitte = x + (i + 0.5) * b / zahlBaelle;
+      const r = (i % 2 ? 6 : 7.5) * Math.min(1, b / 50);
+      c.beginPath();
+      c.arc(mitte, y + 5 + dy, r, 0, Math.PI * 2);
+      c.fill();
+    }
+  };
+  puste(schatten, 2);
+  puste(grund, 0);
+  if (typ === 'broeckel') {
+    c.fillStyle = schatten;
+    c.fillRect(x + b * 0.25, y + 5, 2, h - 6);
+    c.fillRect(x + b * 0.55, y + 3, 2, h - 6);
+    c.fillRect(x + b * 0.8, y + 6, 2, h - 8);
+  }
+}
+
+function malEis(c, typ, x, y, b, h) {
+  const grund = typ === 'broeckel' ? '#8fb7c9' : typ === 'bewegt' ? '#7fe8d0' : typ === 'blink' ? '#d8c6ff' : '#a8e6f6';
+  const hell = mische(grund, '#ffffff', 0.72), dunkel = mische(grund, '#134a6c', 0.5);
+  c.fillStyle = dunkel;
+  c.beginPath();
+  c.moveTo(x, y + 2);
+  c.lineTo(x + b, y + 2);
+  c.lineTo(x + b, y + h - 4);
+  // Kleine Eiszapfen an der Unterseite
+  const zapfen = Math.max(3, Math.round(b / 12));
+  for (let i = zapfen; i > 0; i--) {
+    const breite = b / zapfen;
+    c.lineTo(x + (i - 0.5) * breite, y + h + (i % 2 ? 3 : -1));
+    c.lineTo(x + (i - 1) * breite, y + h - 4);
+  }
+  c.closePath();
+  c.fill();
+  c.fillStyle = grund;
+  eckig(c, x, y, b, h - 5, 3); c.fill();
+  c.fillStyle = hell;
+  c.fillRect(x + 2, y + 1, b - 4, 3);
+  c.fillRect(x + 8, y + 5, 12, 1.5);
+  if (typ === 'broeckel') {
+    c.strokeStyle = dunkel;
+    c.lineWidth = 1.5;
+    c.beginPath();
+    c.moveTo(x + b * 0.3, y); c.lineTo(x + b * 0.36, y + 5); c.lineTo(x + b * 0.3, y + 9);
+    c.moveTo(x + b * 0.68, y); c.lineTo(x + b * 0.62, y + 5); c.lineTo(x + b * 0.68, y + 9);
+    c.stroke();
+  }
+}
+
+function malFels(c, typ, x, y, b, h) {
+  const grund = typ === 'broeckel' ? '#7b6d80' : typ === 'bewegt' ? '#5f6bd8' : typ === 'blink' ? '#b478ff' : '#6f7490';
+  const hell = mische(grund, '#ffffff', 0.34), dunkel = mische(grund, '#05040f', 0.55);
+  if (typ === 'broeckel') {
+    // Ein rissiger Brocken aus dem Asteroidengürtel
+    c.fillStyle = dunkel;
+    eckig(c, x + 2, y + 3, b - 4, h - 2, 6); c.fill();
+    c.fillStyle = grund;
+    eckig(c, x + 2, y, b - 4, h - 3, 6); c.fill();
+    c.fillStyle = dunkel;
+    c.beginPath(); c.arc(x + b * 0.28, y + 6, 2.5, 0, 6.3); c.arc(x + b * 0.7, y + 5, 3, 0, 6.3); c.fill();
+    c.fillRect(x + b * 0.48, y, 2, h - 3);
+    return;
+  }
+  // Eine Raumstations-Platte mit Lichtern
+  c.fillStyle = dunkel;
+  eckig(c, x, y + 2, b, h - 1, 3); c.fill();
+  c.fillStyle = grund;
+  eckig(c, x, y, b, h - 3, 3); c.fill();
+  c.fillStyle = hell;
+  c.fillRect(x + 2, y + 1, b - 4, 2);
+  c.fillStyle = typ === 'bewegt' ? '#7fe3ff' : typ === 'blink' ? '#ffd9ff' : '#ffd34a';
+  c.save();
+  c.shadowColor = c.fillStyle;
+  c.shadowBlur = 5;
+  for (let i = 0; i < 3; i++) c.fillRect(x + b * (0.2 + i * 0.3) - 2, y + 6, 4, 2.5);
+  c.restore();
+}
+
+function malBoden(c, weltNr, sichtbar) {
+  // Der Boden am Start, passend zur Welt
+  const stil = [
+    { oben: '#c88b5a', mitte: '#7a4f30', unten: '#16324a' },
+    { oben: '#ff3fc6', mitte: '#1a0f33', unten: '#07051a' },
+    { oben: '#ffffff', mitte: '#cfe6fb', unten: '#a6d2f2' },
+    { oben: '#eaf9ff', mitte: '#a8d8ea', unten: '#467e9f' },
+    { oben: '#9aa0bc', mitte: '#5a5e78', unten: '#23253a' }
+  ][weltNr];
+  const hoehe = 90;
+  const verlauf = c.createLinearGradient(0, sichtbar, 0, sichtbar + hoehe);
+  verlauf.addColorStop(0, stil.mitte);
+  verlauf.addColorStop(1, stil.unten);
+  c.fillStyle = verlauf;
+  c.fillRect(0, sichtbar, B, hoehe);
+  c.fillStyle = stil.oben;
+  c.fillRect(0, sichtbar, B, 5);
+  c.fillStyle = 'rgba(0,0,0,0.18)';
+  for (let i = 0; i < B; i += 32) c.fillRect(i, sichtbar + 5, 2, hoehe);
+}
+
+function malZiel(c, y) {
+  // Goldene Ziel-Plattform über die ganze Breite mit Fahne
+  const verlauf = c.createLinearGradient(0, y, 0, y + 14);
+  verlauf.addColorStop(0, '#ffe28a');
+  verlauf.addColorStop(1, '#c88f1f');
+  c.fillStyle = verlauf;
+  c.fillRect(0, y - 7, B, 14);
+  c.fillStyle = '#fff4c7';
+  c.fillRect(0, y - 7, B, 2);
+  c.fillStyle = 'rgba(0,0,0,0.22)';
+  for (let i = 0; i < B + 20; i += 20) c.fillRect(i - (i % 40 ? 0 : 0), y - 3, 10, 3);
+  // Mast und Fahne
+  const fx = B / 2;
+  c.fillStyle = '#ece9e2';
+  c.fillRect(fx - 1.5, y - 74, 3, 68);
+  c.fillStyle = '#f2b84b';
+  c.beginPath();
+  c.arc(fx, y - 76, 4, 0, 6.3);
+  c.fill();
+  const wehen = Math.sin(s.zeit * 6) * 3;
+  c.fillStyle = '#e5384f';
+  c.beginPath();
+  c.moveTo(fx + 1.5, y - 72);
+  c.quadraticCurveTo(fx + 22, y - 72 + wehen, fx + 38, y - 66 + wehen);
+  c.quadraticCurveTo(fx + 22, y - 58 + wehen, fx + 1.5, y - 52);
+  c.closePath();
+  c.fill();
+}
+
+function malPlattform(c, pl, sy) {
+  const weltNr = weltIndex(s.level);
+  if (pl.typ === 'boden') { malBoden(c, weltNr, sy - PLATTE_H / 2); return; }
+  if (pl.typ === 'ziel') { malZiel(c, sy); return; }
+  const breite = Math.round(pl.b);
+  const schluessel = 'pl' + weltNr + pl.typ + breite;
+  const flaeche = figur(schluessel, breite + 16, PLATTE_H + 20, k => malPlattformBild(k, weltNr, pl.typ, breite, PLATTE_H));
+  c.save();
+  if (pl.neuUhr > 0) c.globalAlpha = 1 - pl.neuUhr / 0.35;
+  if (pl.typ === 'blink') {
+    const zustand = blinkZustand(pl);
+    if (zustand === 0) c.globalAlpha = 0.12;
+    else if (zustand < 1) c.globalAlpha = 0.45 + 0.4 * Math.abs(Math.sin(s.zeit * 18));
+  }
+  c.drawImage(flaeche, pl.x - breite / 2 - 8, sy - PLATTE_H / 2 - 8, breite + 16, PLATTE_H + 20);
+  c.restore();
+  if (pl.feder) malFeder(c, pl.x + pl.feder.dx, sy - PLATTE_H / 2, pl.feder.gestaucht);
+}
+
+function malFeder(c, x, y, gestaucht) {
+  const hoehe = 12 - gestaucht * 7;
+  c.fillStyle = '#aeb6c8';
+  for (let i = 0; i < 3; i++) c.fillRect(x - 7 + (i % 2), y - 3 - (i * hoehe) / 3, 14, 2);
+  c.fillStyle = '#ffd34a';
+  c.fillRect(x - 10, y - hoehe - 5, 20, 4);
+  c.fillStyle = '#fff4c7';
+  c.fillRect(x - 10, y - hoehe - 5, 20, 1);
+}
+
+// --- Sachen zum Einsammeln ---
+
+function malMuenze(c, x, y, zeit) {
+  const breite = Math.abs(Math.cos(zeit * 4)) * 8 + 1.5;
+  const flaeche = figur('muenze', 20, 20, k => {
+    k.fillStyle = 'rgba(255,211,74,0.25)';
+    k.beginPath(); k.arc(10, 10, 9.5, 0, 6.3); k.fill();
+    k.fillStyle = '#c88f1f';
+    k.beginPath(); k.arc(10, 10, 7.5, 0, 6.3); k.fill();
+    k.fillStyle = '#ffd34a';
+    k.beginPath(); k.arc(10, 9.5, 6.5, 0, 6.3); k.fill();
+    k.fillStyle = '#fff4c7';
+    k.fillRect(8, 5, 3, 9);
+  });
+  c.drawImage(flaeche, x - breite, y - 10, breite * 2, 20);
+}
+
+function malSternFigur(c, x, y, aussen, innen) {
+  c.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 ? innen : aussen;
+    const w = -Math.PI / 2 + (i * Math.PI) / 5;
+    c.lineTo(x + Math.cos(w) * r, y + Math.sin(w) * r);
+  }
+  c.closePath();
+}
+
+function malStern(c, x, y, zeit) {
+  const puls = 1 + Math.sin(zeit * 5) * 0.09;
+  c.save();
+  c.translate(x, y);
+  c.scale(puls, puls);
+  c.rotate(Math.sin(zeit * 2) * 0.15);
+  const flaeche = figur('stern', 60, 60, k => {
+    const schein = k.createRadialGradient(30, 30, 3, 30, 30, 30);
+    schein.addColorStop(0, 'rgba(255,226,138,0.65)');
+    schein.addColorStop(1, 'rgba(255,226,138,0)');
+    k.fillStyle = schein;
+    k.fillRect(0, 0, 60, 60);
+    malSternFigur(k, 30, 31, 17, 8);
+    k.fillStyle = '#c88f1f';
+    k.fill();
+    malSternFigur(k, 30, 29, 16, 7.5);
+    k.fillStyle = '#ffe28a';
+    k.fill();
+    malSternFigur(k, 28, 26, 7, 3);
+    k.fillStyle = '#fffbe6';
+    k.fill();
+  });
+  c.drawImage(flaeche, -30, -30, 60, 60);
+  c.restore();
+}
+
+function malHilfe(c, typ, x, y, g) {
+  // Jede Hilfe sitzt in einer leuchtenden Blase
+  c.save();
+  c.translate(x, y);
+  c.scale(g / 40, g / 40);
+  const farbe = { feder: '#ffd34a', rakete: '#ff7a4a', schild: '#5fd2f2', magnet: '#e5384f', herz: '#ff5d8f' }[typ];
+  const schein = c.createRadialGradient(0, 0, 4, 0, 0, 20);
+  schein.addColorStop(0, farbe + '66');
+  schein.addColorStop(1, farbe + '00');
+  c.fillStyle = schein;
+  c.fillRect(-20, -20, 40, 40);
+  c.fillStyle = '#14151a';
+  c.beginPath(); c.arc(0, 0, 14, 0, 6.3); c.fill();
+  c.strokeStyle = farbe;
+  c.lineWidth = 2;
+  c.stroke();
+  if (typ === 'feder') {
+    c.fillStyle = '#ffd34a';
+    c.fillRect(-7, -8, 14, 3);
+    c.fillStyle = '#aeb6c8';
+    c.fillRect(-5, -4, 10, 2); c.fillRect(-4, -1, 10, 2); c.fillRect(-5, 2, 10, 2);
+    c.fillStyle = '#ffd34a';
+    c.fillRect(-7, 5, 14, 3);
+  } else if (typ === 'rakete') {
+    c.fillStyle = '#ece9e2';
+    c.beginPath(); c.moveTo(0, -11); c.lineTo(5, -3); c.lineTo(5, 6); c.lineTo(-5, 6); c.lineTo(-5, -3); c.closePath(); c.fill();
+    c.fillStyle = '#e5384f';
+    c.fillRect(-8, 2, 3, 6); c.fillRect(5, 2, 3, 6);
+    c.fillStyle = '#3f8ae0';
+    c.beginPath(); c.arc(0, -2, 2.4, 0, 6.3); c.fill();
+    c.fillStyle = '#ffb347';
+    c.fillRect(-3, 7, 6, 4);
+  } else if (typ === 'schild') {
+    c.fillStyle = '#5fd2f2';
+    c.beginPath(); c.moveTo(-8, -9); c.lineTo(8, -9); c.lineTo(8, 1); c.quadraticCurveTo(7, 7, 0, 11); c.quadraticCurveTo(-7, 7, -8, 1); c.closePath(); c.fill();
+    c.fillStyle = '#d6f7ff';
+    c.fillRect(-5, -6, 3, 8);
+  } else if (typ === 'magnet') {
+    c.lineWidth = 5;
+    c.strokeStyle = '#e5384f';
+    c.beginPath(); c.arc(0, -1, 6, Math.PI, 0); c.lineTo(6, 6); c.moveTo(-6, -1); c.lineTo(-6, 6); c.stroke();
+    c.fillStyle = '#ece9e2';
+    c.fillRect(-8.5, 5, 5, 4); c.fillRect(3.5, 5, 5, 4);
+  } else {
+    malHerzForm(c, 0, 0.5, 1.15, '#ff5d8f');
+  }
+  c.restore();
+}
+
+function malHerzForm(c, x, y, g, farbe) {
+  const zeilen = ['.XX.XX.', 'XXXXXXX', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'];
+  const px = 2.1 * g;
+  c.fillStyle = farbe;
+  zeilen.forEach((zeile, zy) => {
+    Array.from(zeile).forEach((zeichen, zx) => {
+      if (zeichen === 'X') c.fillRect(x + (zx - 3.5) * px, y + (zy - 3) * px, px + 0.2, px + 0.2);
+    });
+  });
+}
+
+// --- Gegner und Hindernisse, passend zur Welt ---
+
+const GEGNER_BILDER = [
+  // Möwe
+  { farben: { a: '#f6f4ea', b: '#b8c0cf', s: '#1a1a2a', g: '#f2a33c' }, bild: [['................', '................', 'bb............bb', 'bab..........bab', '.baab......baab.', '..baaab..baaab..', '...baaaaaaaab...', '....aaaaaaaa....', '...aasaaaasaa...', '...aaaaaaaaaa...', '....bagggab.....', '......bbb.......'], ['................', '......aaaa......', '....aaaaaaaa....', '...aasaaaasaa...', '...aaaaaaaaaa...', '..baaaagggaaab..', '.baaabbbbbbaaab.', 'bab..........bab', 'bb............bb', '................', '................', '................']] },
+  // Drohne
+  { farben: { a: '#2a2350', b: '#ff3fc6', s: '#3fe0ff', g: '#8a84c0', d: '#120a26' }, bild: [['gggggg....gggggg', '..dd........dd..', '..dd........dd..', '..aaaaaaaaaaaa..', '.aabbbbbbbbbbaa.', '.aaaaaaaaaaaaaa.', '.aaaasssssaaaaa.', '.aaasssssssaaaa.', '.aaaasssssaaaaa.', '..aaaaaaaaaaaa..', '...dd......dd...', '................'], ['...gggg..gggg...', '..dd........dd..', '..dd........dd..', '..aaaaaaaaaaaa..', '.aabbbbbbbbbbaa.', '.aaaaaaaaaaaaaa.', '.aaaasssssaaaaa.', '.aaasssssssaaaa.', '.aaaasssssaaaaa.', '..aaaaaaaaaaaa..', '...dd......dd...', '................']] },
+  // Gewitterwölkchen
+  { farben: { a: '#5a5880', b: '#3b3960', c: '#8b89b5', s: '#ffffff', g: '#ffe24a', d: '#1d1b38' }, bild: [['................', '.....aaaaa......', '...aacccaaaa....', '..aacaaaaaaaaa..', '.aaaaaaaaaaaaaa.', '.aassdaaaassdaa.', '.aassdaaaassdaa.', '.aaaaaaaaaaaaaa.', '..bbbbbbbbbbbb..', '....g....g......', '...gg...gg......', '...g....g.......'], ['................', '.....aaaaa......', '...aacccaaaa....', '..aacaaaaaaaaa..', '.aaaaaaaaaaaaaa.', '.aassdaaaassdaa.', '.aassdaaaassdaa.', '.aaaaaaaaaaaaaa.', '..bbbbbbbbbbbb..', '......g....g....', '.....gg...gg....', '.....g....g.....']] },
+  // Schnee-Eule
+  { farben: { a: '#eef7fb', b: '#a8c8d8', s: '#1a2a3a', g: '#f2a33c', w: '#ffe28a' }, bild: [['...a........a...', '...aa......aa...', '...aaaaaaaaaa...', '..aawwwaawwwaa..', '..aawsswawssaa..', '..aawwwaawwwaa..', 'bb.aaaaggaaaa.bb', 'baabaaaaaaaabaab', '.baabbaaaabbaab.', '..bb.baaaab.bb..', '.....gg..gg.....', '................'], ['...a........a...', '...aa......aa...', '...aaaaaaaaaa...', '..aawwwaawwwaa..', '..aawsswawssaa..', 'b.aawwwaawwwaa.b', 'bb.aaaaggaaaa.bb', '.baabaaaaaabaab.', '..baabaaaabaab..', '...bb.baab.bb...', '.....gg..gg.....', '................']] },
+  // Ufo
+  { farben: { a: '#9aa0bc', b: '#5a5e78', c: '#c2fff0', s: '#2a7a6a', g: '#ffe24a', r: '#ff5d73' }, bild: [['................', '.....cccccc.....', '....cccsscccc...', '....ccssssccc...', '...aaaaaaaaaa...', '.aaaaaaaaaaaaaa.', 'bbgbbrbbgbbrbbgb', '.bbbbbbbbbbbbbb.', '...bbbbbbbbbb...', '................', '................', '................'], ['................', '.....cccccc.....', '....cccsscccc...', '....ccssssccc...', '...aaaaaaaaaa...', '.aaaaaaaaaaaaaa.', 'bbrbbgbbrbbgbbrb', '.bbbbbbbbbbbbbb.', '...bbbbbbbbbb...', '................', '................', '................']] }
+];
+
+const gegnerCache = new Map();
+function gegnerBild(weltNr, frame, spiegel) {
+  const schluessel = weltNr + '-' + frame + (spiegel ? 's' : '');
+  if (!gegnerCache.has(schluessel)) {
+    const def = GEGNER_BILDER[weltNr];
+    gegnerCache.set(schluessel, pixelBild(def.bild[frame], def.farben, spiegel));
+  }
+  return gegnerCache.get(schluessel);
+}
+
+function malGegner(c, g, sy, weltNr) {
+  c.save();
+  c.imageSmoothingEnabled = false;
+  const frame = Math.floor(s.zeit * 6 + g.phase) % 2;
+  const bildchen = gegnerBild(weltNr, frame, (g.blick || 1) < 0);
+  if (g.weg) {
+    c.translate(g.x, sy);
+    c.rotate((g.fall || 0) * 6);
+    c.globalAlpha = 0.8;
+    c.drawImage(bildchen, -18, -14, 36, 27);
+  } else {
+    const hub = Math.sin(s.zeit * 3 + g.phase) * 3;
+    c.drawImage(bildchen, g.x - 18, sy - 14 + hub, 36, 27);
+  }
+  c.restore();
+}
+
+const STACHEL_FARBEN = [
+  { kern: '#3c2f4a', stachel: '#7a5a8c', licht: '#ff6a55' },   // Seeigel-Mine
+  { kern: '#201040', stachel: '#3fe0ff', licht: '#ffffff' },   // Neon-Würfel
+  { kern: '#46436e', stachel: '#ffe24a', licht: '#ffffff' },   // Kugelblitz
+  { kern: '#135b73', stachel: '#d6f7ff', licht: '#ffffff' },   // Eiskristall
+  { kern: '#4a2f22', stachel: '#ff7a4a', licht: '#ffd34a' }    // Glühender Brocken
+];
+
+function malStachel(c, x, y, phase, weltNr) {
+  const farbe = STACHEL_FARBEN[weltNr];
+  const flaeche = figur('stachel' + weltNr, 44, 44, k => {
+    k.translate(22, 22);
+    const schein = k.createRadialGradient(0, 0, 6, 0, 0, 22);
+    schein.addColorStop(0, farbe.stachel + '44');
+    schein.addColorStop(1, farbe.stachel + '00');
+    k.fillStyle = schein;
+    k.fillRect(-22, -22, 44, 44);
+    k.fillStyle = farbe.stachel;
+    for (let i = 0; i < 8; i++) {
+      const w = (i * Math.PI) / 4;
+      k.save();
+      k.rotate(w);
+      k.beginPath();
+      k.moveTo(-4.5, -10);
+      k.lineTo(0, -20);
+      k.lineTo(4.5, -10);
+      k.closePath();
+      k.fill();
+      k.restore();
+    }
+    k.fillStyle = farbe.kern;
+    k.beginPath(); k.arc(0, 0, 12, 0, 6.3); k.fill();
+    k.strokeStyle = farbe.stachel;
+    k.lineWidth = 1.5;
+    k.stroke();
+    k.fillStyle = farbe.licht;
+    k.beginPath(); k.arc(-3.5, -3.5, 2.6, 0, 6.3); k.fill();
+  });
+  c.save();
+  c.translate(x, y);
+  c.rotate(s.zeit * 0.9 + phase);
+  c.drawImage(flaeche, -22, -22, 44, 44);
+  c.restore();
+}
+
+function malLaser(c, l, sy) {
+  const farbe = weltIndex(s.level) === 4 ? '#c98bff' : '#ff3f6a';
+  // Halter am Ende, von dort geht der Strahl los
+  const kopfX = l.links ? l.x2 : l.x1;
+  c.fillStyle = '#2a2350';
+  c.fillRect(kopfX - 7, sy - 10, 14, 20);
+  c.fillStyle = l.an ? farbe : l.warnt ? '#ffe24a' : '#6f7490';
+  c.fillRect(kopfX - 4, sy - 5, 8, 10);
+  c.fillStyle = '#2a2350';
+  c.fillRect(l.links ? 0 : B - 8, sy - 10, 8, 20);
+  if (l.an) {
+    c.save();
+    c.shadowColor = farbe;
+    c.shadowBlur = 10;
+    c.fillStyle = farbe;
+    c.fillRect(l.x1, sy - 3, l.x2 - l.x1, 6);
+    c.restore();
+    c.fillStyle = '#ffffff';
+    c.fillRect(l.x1, sy - 1, l.x2 - l.x1, 2);
+  } else if (l.warnt) {
+    c.fillStyle = farbe + '88';
+    for (let x = l.x1; x < l.x2; x += 14) c.fillRect(x, sy - 1, 7, 2);
+  }
+}
+
+function malFaller(c, f, sy, weltNr) {
+  c.save();
+  c.translate(f.x, sy);
+  if (weltNr === 4) {
+    // Meteor mit Glut-Schweif
+    const verlauf = c.createLinearGradient(0, -46, 0, 0);
+    verlauf.addColorStop(0, 'rgba(255,122,74,0)');
+    verlauf.addColorStop(1, 'rgba(255,190,90,0.85)');
+    c.fillStyle = verlauf;
+    c.beginPath(); c.moveTo(-9, -2); c.lineTo(0, -48); c.lineTo(9, -2); c.closePath(); c.fill();
+    c.fillStyle = '#7a4a34';
+    c.beginPath(); c.arc(0, 0, 12, 0, 6.3); c.fill();
+    c.fillStyle = '#ffb347';
+    c.beginPath(); c.arc(-3, -3, 5, 0, 6.3); c.fill();
+  } else {
+    // Eiszapfen
+    c.fillStyle = '#d6f7ff';
+    c.beginPath(); c.moveTo(-10, -20); c.lineTo(10, -20); c.lineTo(0, 22); c.closePath(); c.fill();
+    c.fillStyle = '#ffffff';
+    c.beginPath(); c.moveTo(-6, -20); c.lineTo(-1, -20); c.lineTo(-1, 8); c.closePath(); c.fill();
+    c.fillStyle = '#79b6cf';
+    c.beginPath(); c.moveTo(4, -20); c.lineTo(10, -20); c.lineTo(0, 22); c.closePath(); c.fill();
+  }
+  c.restore();
+}
+
+// --- Figur ---
+
+function malSpieler(c, p, sy, x) {
+  c.save();
+  c.translate(x, sy);
+  const dehnung = begrenzt(p.vy / 2200, -0.14, 0.12);
+  const stauch = p.stauch * 0.28;
+  const sx = 1 + stauch - Math.abs(dehnung) * 0.6;
+  const syF = 1 - stauch + Math.abs(dehnung) * 0.7;
+  if (p.tot) c.rotate(p.dreh);
+  c.translate(0, P_H / 2);
+  c.scale(sx, syF);
+  c.translate(0, -P_H / 2);
+  c.imageSmoothingEnabled = false;
+  const bildchen = figurBild(daten.figur, p.blick < 0);
+  if (p.schutz > 0 && !p.tot && Math.floor(p.schutz * 12) % 2 === 0) c.globalAlpha = 0.4;
+  c.drawImage(bildchen, -18, -21, 36, 36);
+  c.globalAlpha = 1;
+  if (p.rakete > 0) {
+    // Der Rucksack mit Düsenflamme
+    const flamme = 10 + Math.random() * 10;
+    c.fillStyle = '#ff7a3c';
+    c.beginPath(); c.moveTo(-8, 12); c.lineTo(0, 12 + flamme); c.lineTo(8, 12); c.closePath(); c.fill();
+    c.fillStyle = '#ffe28a';
+    c.beginPath(); c.moveTo(-4, 12); c.lineTo(0, 12 + flamme * 0.6); c.lineTo(4, 12); c.closePath(); c.fill();
+  }
+  c.restore();
+  if (s.schild) {
+    c.save();
+    c.globalAlpha = 0.65 + Math.sin(s.zeit * 6) * 0.15;
+    c.strokeStyle = '#8fe3f2';
+    c.lineWidth = 2.5;
+    c.beginPath(); c.arc(x, sy - 2, 26, 0, 6.3); c.stroke();
+    c.fillStyle = 'rgba(143,227,242,0.13)';
+    c.fill();
+    c.restore();
+  }
+  if (s.magnet > 0 && s.magnet > 2 || (s.magnet > 0 && Math.floor(s.magnet * 8) % 2 === 0)) {
+    c.save();
+    c.strokeStyle = 'rgba(229,56,79,0.35)';
+    c.lineWidth = 1.5;
+    c.setLineDash([4, 6]);
+    c.lineDashOffset = -s.zeit * 30;
+    c.beginPath(); c.arc(x, sy, 40, 0, 6.3); c.stroke();
+    c.restore();
+  }
+}
+
+// --- Hintergründe: für jede Welt ein eigenes Bild, in mehreren Ebenen ---
+
+function textMitte(text, x, y, groesse, farbe, alpha = 1) {
+  pinsel.save();
+  pinsel.globalAlpha = alpha;
+  pinsel.font = groesse + 'px "Press Start 2P", "Courier New", monospace';
+  pinsel.textAlign = 'center';
+  pinsel.textBaseline = 'middle';
+  pinsel.fillStyle = 'rgba(8,8,16,0.72)';
+  pinsel.fillText(text, x + 2, y + 2);
+  pinsel.fillStyle = farbe;
+  pinsel.fillText(text, x, y);
+  pinsel.restore();
+}
+
+// Fester Zufallswert für eine Kachel des Hintergrunds
+function kachelWert(a, b, c = 0) {
+  let h = Math.imul(a * 374761393 + b * 668265263 + c * 2147483647, 1274126177);
+  h ^= h >>> 13;
+  h = Math.imul(h, 1597334677);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+function hexZuRgb(f) { return [parseInt(f.slice(1, 3), 16), parseInt(f.slice(3, 5), 16), parseInt(f.slice(5, 7), 16)]; }
+function mischFarbe(a, b, anteil) {
+  const x = hexZuRgb(a), y = hexZuRgb(b);
+  return '#' + x.map((wert, i) => Math.round(wert + (y[i] - wert) * anteil).toString(16).padStart(2, '0')).join('');
+}
+
+// Der Himmel ändert sich langsam mit der Höhe, also bekommt jedes Level einen Tagesverlauf
+function malHimmel(c, w, fortschrittH) {
+  const stufe = Math.round(fortschrittH * 40) / 40;
+  const schluessel = weltIndex(s.level) + ':' + stufe + ':' + H;
+  if (!hintergrundCache || hintergrundCache.schluessel !== schluessel) {
+    const leinwand = document.createElement('canvas');
+    leinwand.width = 4;
+    leinwand.height = Math.round(H);
+    const k = leinwand.getContext('2d');
+    const verlauf = k.createLinearGradient(0, 0, 0, H);
+    verlauf.addColorStop(0, mischFarbe(w.himmelOben[0], w.himmelOben[1], stufe));
+    verlauf.addColorStop(0.55, mischFarbe(w.himmelMitte[0], w.himmelMitte[1], stufe));
+    verlauf.addColorStop(1, mischFarbe(w.himmelUnten[0], w.himmelUnten[1], stufe));
+    k.fillStyle = verlauf;
+    k.fillRect(0, 0, 4, H);
+    hintergrundCache = { schluessel, leinwand };
+  }
+  c.drawImage(hintergrundCache.leinwand, 0, 0, B, H);
+}
+
+// Pixelige Wolke als fertiges Bild
+function wolkenBild(schluessel, farbe, schatten) {
+  return figur(schluessel, 120, 56, k => {
+    k.fillStyle = schatten;
+    const teile = [[6, 26, 108, 18], [18, 16, 44, 14], [42, 8, 48, 18], [70, 18, 36, 12]];
+    for (const [x, y, b, h] of teile) k.fillRect(x, y + 6, b, h);
+    k.fillStyle = farbe;
+    for (const [x, y, b, h] of teile) k.fillRect(x, y, b, h);
+  });
+}
+
+function malHintergrund(c) {
+  const w = s.gr.w;
+  const nr = weltIndex(s.level);
+  const hoehe = -s.kamera - H * 0.5;
+  const fort = begrenzt(hoehe / -s.gr.zielY, 0, 1);
+  malHimmel(c, w, fort);
+  [malHafenWelt, malNeonWelt, malWolkenWelt, malEisWelt, malAllWelt][nr](c, fort);
+}
+
+// Kacheln, die sich beim Klettern mit einer eigenen Geschwindigkeit bewegen
+function kacheln(c, tiefe, abstand, male) {
+  const verschiebung = s.kamera * tiefe;
+  const erste = Math.floor(verschiebung / abstand) - 1;
+  const letzte = Math.ceil((verschiebung + H) / abstand) + 1;
+  for (let i = erste; i <= letzte; i++) male(i, i * abstand - verschiebung);
+}
+
+function malHafenWelt(c, fort) {
+  // Sonne, die höher steigt
+  const sonneY = H * 0.74 - (-s.kamera - H) * 0.05;
+  const schein = c.createRadialGradient(B * 0.68, sonneY, 8, B * 0.68, sonneY, 150);
+  schein.addColorStop(0, 'rgba(255,240,190,0.9)');
+  schein.addColorStop(0.3, 'rgba(255,214,140,0.42)');
+  schein.addColorStop(1, 'rgba(255,214,140,0)');
+  c.fillStyle = schein;
+  c.fillRect(0, 0, B, H);
+  c.fillStyle = '#fff4cc';
+  c.beginPath(); c.arc(B * 0.68, sonneY, 28, 0, 6.3); c.fill();
+
+  // Wolken
+  kacheln(c, 0.22, 170, (i, y) => {
+    const wert = kachelWert(i, 3);
+    if (wert < 0.3) return;
+    const x = (kachelWert(i, 7) * (B + 120) - 60 + s.zeit * (3 + wert * 3)) % (B + 180) - 90;
+    c.globalAlpha = 0.75;
+    c.drawImage(wolkenBild('wHafen', '#ffe9d1', '#f3b89b'), x, y, 110, 52);
+    c.globalAlpha = 1;
+  });
+  // Ferne Möwen
+  kacheln(c, 0.36, 240, (i, y) => {
+    if (kachelWert(i, 9) < 0.55) return;
+    const x = kachelWert(i, 11) * B;
+    const flug = Math.sin(s.zeit * 4 + i) * 2;
+    c.strokeStyle = 'rgba(60,40,70,0.55)';
+    c.lineWidth = 1.5;
+    c.beginPath();
+    c.moveTo(x - 7, y + flug); c.quadraticCurveTo(x - 3, y - 3, x, y); c.quadraticCurveTo(x + 3, y - 3, x + 7, y + flug);
+    c.stroke();
+  });
+
+  // Der Hafen unten: scrollt mit und verschwindet nach oben hin
+  const unten = H - 48 - (s.kamera + H - 60) * 0.55;
+  if (unten - 320 < H) malHafenSzene(c, unten);
+}
+
+function malHafenSzene(c, unten) {
+  const flaeche = figur('hafenSzene', B, 320, k => {
+    // Häuser und Kräne als Silhouette
+    k.fillStyle = '#7a4c6c';
+    const huser = [[0, 210, 44], [40, 196, 34], [72, 216, 40], [226, 206, 36], [258, 188, 46], [300, 214, 60]];
+    for (const [x, y, b] of huser) k.fillRect(x, y, b, 320 - y);
+    k.fillStyle = '#ffd98a';
+    for (const [x, y, b] of huser) {
+      for (let fy = y + 8; fy < 250; fy += 13) {
+        for (let fx = x + 5; fx < x + b - 6; fx += 10) {
+          if (kachelWert(fx, fy) > 0.5) k.fillRect(fx, fy, 4, 6);
+        }
+      }
+    }
+    // Kran
+    k.fillStyle = '#5a3a60';
+    k.fillRect(136, 142, 6, 120);
+    k.fillRect(108, 146, 76, 5);
+    k.fillRect(168, 146, 2, 40);
+    k.fillRect(162, 184, 14, 8);
+    k.fillRect(112, 151, 2, 16);
+    // Leuchtturm
+    k.fillStyle = '#f2ece0';
+    k.beginPath(); k.moveTo(206, 262); k.lineTo(212, 112); k.lineTo(234, 112); k.lineTo(240, 262); k.closePath(); k.fill();
+    k.fillStyle = '#e5384f';
+    k.beginPath(); k.moveTo(208.6, 198); k.lineTo(209.6, 170); k.lineTo(236.4, 170); k.lineTo(237.4, 198); k.closePath(); k.fill();
+    k.beginPath(); k.moveTo(211, 142); k.lineTo(211.6, 124); k.lineTo(234.4, 124); k.lineTo(235, 142); k.closePath(); k.fill();
+    k.fillStyle = '#3c2f4a';
+    k.fillRect(209, 106, 28, 6);
+    k.fillStyle = '#ffe28a';
+    k.fillRect(213, 92, 20, 14);
+    k.fillStyle = '#3c2f4a';
+    k.beginPath(); k.moveTo(209, 92); k.lineTo(223, 78); k.lineTo(237, 92); k.closePath(); k.fill();
+    // Wasser
+    const wasser = k.createLinearGradient(0, 258, 0, 320);
+    wasser.addColorStop(0, '#2a9fc9');
+    wasser.addColorStop(1, '#134a70');
+    k.fillStyle = wasser;
+    k.fillRect(0, 258, B, 62);
+    k.fillStyle = 'rgba(255,240,200,0.5)';
+    for (let i = 0; i < 40; i++) k.fillRect(kachelWert(i, 1) * B, 262 + kachelWert(i, 2) * 54, 6 + kachelWert(i, 3) * 18, 2);
+    // Boote
+    k.fillStyle = '#e5384f';
+    k.beginPath(); k.moveTo(30, 256); k.lineTo(96, 256); k.lineTo(84, 272); k.lineTo(40, 272); k.closePath(); k.fill();
+    k.fillStyle = '#f6f4ea';
+    k.fillRect(56, 218, 3, 38);
+    k.beginPath(); k.moveTo(59, 220); k.lineTo(86, 252); k.lineTo(59, 252); k.closePath(); k.fill();
+  });
+  c.drawImage(flaeche, 0, unten - 320, B, 320);
+  c.fillStyle = '#134a70';
+  c.fillRect(0, unten - 1, B, Math.max(0, H - unten + 2));
+  // Licht vom Leuchtturm
+  if (!wenigBewegung.matches) {
+    const winkel = Math.sin(s.zeit * 0.7) * 0.5;
+    c.save();
+    c.translate(223, unten - 320 + 99);
+    c.rotate(winkel + Math.PI);
+    const strahl = c.createLinearGradient(0, 0, 200, 0);
+    strahl.addColorStop(0, 'rgba(255,240,180,0.55)');
+    strahl.addColorStop(1, 'rgba(255,240,180,0)');
+    c.fillStyle = strahl;
+    c.beginPath(); c.moveTo(0, 0); c.lineTo(210, -30); c.lineTo(210, 30); c.closePath(); c.fill();
+    c.restore();
+  }
+}
+
+function malNeonWelt(c) {
+  // Hochhäuser, die immer weiter nach oben reichen. Die Stockwerke passen nahtlos aneinander.
+  const reihe = (tiefe, farbe, fenster, schluessel, seed, fensterAnteil) => {
+    kacheln(c, tiefe, 360, (i, y) => {
+      const flaeche = figur(schluessel, B, 360, k => {
+        let x = -6;
+        let n = 0;
+        while (x < B) {
+          const breite = 40 + kachelWert(n, seed) * 44;
+          k.fillStyle = farbe;
+          k.fillRect(x, 0, breite, 360);
+          k.fillStyle = mische(farbe, '#ffffff', 0.05);
+          k.fillRect(x, 0, 2, 360);
+          for (let fy = 7; fy < 360; fy += 15) {
+            for (let fx = x + 7; fx < x + breite - 7; fx += 12) {
+              const wert = kachelWert(fx * 3 + n, fy, seed);
+              if (wert > fensterAnteil) {
+                k.fillStyle = wert > 0.975 ? '#3fe0ff' : wert > 0.95 ? '#ff3fc6' : fenster;
+                k.fillRect(fx, fy, 5, 7);
+              }
+            }
+          }
+          x += breite + 24 + kachelWert(n, seed + 1) * 60;
+          n++;
+        }
+      });
+      c.drawImage(flaeche, 0, y, B, 361);
+    });
+  };
+  reihe(0.12, '#21104a', '#3a2668', 'hausFern', 11, 0.72);
+
+  // Mond
+  const mondY = 96 - (s.kamera + H) * 0.015;
+  c.fillStyle = 'rgba(255,214,250,0.16)';
+  c.beginPath(); c.arc(B * 0.3, mondY, 58, 0, 6.3); c.fill();
+  c.fillStyle = '#f9d6ff';
+  c.beginPath(); c.arc(B * 0.3, mondY, 34, 0, 6.3); c.fill();
+  c.fillStyle = '#d89fe8';
+  c.beginPath(); c.arc(B * 0.3 + 9, mondY - 8, 6, 0, 6.3); c.arc(B * 0.3 - 12, mondY + 9, 8, 0, 6.3); c.fill();
+
+  // Leuchtreklamen
+  kacheln(c, 0.34, 210, (i, y) => {
+    const wert = kachelWert(i, 21);
+    if (wert < 0.4) return;
+    const x = 26 + kachelWert(i, 23) * (B - 90);
+    const farbe = wert > 0.72 ? '#ff3fc6' : '#3fe0ff';
+    const flacker = !wenigBewegung.matches && Math.sin(s.zeit * 14 + i * 3) > 0.88 ? 0.28 : 0.72;
+    c.save();
+    c.globalAlpha = flacker;
+    c.shadowColor = farbe;
+    c.shadowBlur = 12;
+    c.strokeStyle = farbe;
+    c.lineWidth = 2;
+    c.strokeRect(x, y, 44, 22);
+    c.fillStyle = farbe;
+    c.fillRect(x + 6, y + 7, 32, 2.5);
+    c.fillRect(x + 6, y + 13, 20, 2.5);
+    c.restore();
+  });
+
+  reihe(0.34, '#110733', '#3b2a68', 'hausNah', 37, 0.84);
+
+  // Regen
+  if (!wenigBewegung.matches) {
+    c.fillStyle = 'rgba(180,200,255,0.2)';
+    for (let i = 0; i < 44; i++) {
+      const x = (kachelWert(i, 31) * B + s.zeit * 40) % B;
+      const y = (kachelWert(i, 33) * H + s.zeit * (520 + kachelWert(i, 35) * 220)) % H;
+      c.fillRect(x, y, 1.2, 12);
+    }
+  }
+}
+
+function malWolkenWelt(c) {
+  // Sonne mit Strahlen
+  const sx = B * 0.8, sy = 74;
+  c.save();
+  c.translate(sx, sy);
+  c.rotate(s.zeit * 0.05);
+  c.fillStyle = 'rgba(255,255,220,0.1)';
+  for (let i = 0; i < 8; i++) {
+    c.rotate(Math.PI / 4);
+    c.beginPath(); c.moveTo(0, 0); c.lineTo(-44, -480); c.lineTo(44, -480); c.closePath(); c.fill();
+  }
+  c.restore();
+  c.fillStyle = 'rgba(255,255,230,0.42)';
+  c.beginPath(); c.arc(sx, sy, 46, 0, 6.3); c.fill();
+  c.fillStyle = '#fffbe6';
+  c.beginPath(); c.arc(sx, sy, 28, 0, 6.3); c.fill();
+
+  const wolken = (tiefe, abstand, groesse, tempo, alpha, schluessel, farbe, schatten, grenze) => {
+    kacheln(c, tiefe, abstand, (i, y) => {
+      for (let n = 0; n < 2; n++) {
+        const wert = kachelWert(i, 40 + n, tiefe * 100);
+        if (wert < grenze) continue;
+        const b = groesse * (0.7 + wert * 0.6);
+        const roh = kachelWert(i, 44 + n, tiefe * 100) * (B + b + 80) + s.zeit * tempo * (s.wind >= 0 ? 1 : 1);
+        const x = (roh % (B + b + 80)) - b - 40;
+        c.globalAlpha = alpha;
+        c.drawImage(wolkenBild(schluessel, farbe, schatten), x, y + n * 44, b, b * 0.47);
+        c.globalAlpha = 1;
+      }
+    });
+  };
+  wolken(0.16, 120, 104, 3, 0.55, 'wFern', '#dff3ff', '#b3dcf6', 0.45);
+
+  // Schwebende Inseln
+  kacheln(c, 0.28, 420, (i, y) => {
+    if (kachelWert(i, 51) < 0.5) return;
+    const x = kachelWert(i, 53) * (B - 110);
+    const flaeche = figur('insel', 120, 80, k => {
+      k.fillStyle = '#7c6a58';
+      k.beginPath(); k.moveTo(6, 20); k.lineTo(114, 20); k.lineTo(88, 44); k.lineTo(72, 40); k.lineTo(58, 74); k.lineTo(42, 46); k.lineTo(26, 42); k.closePath(); k.fill();
+      k.fillStyle = '#5ec26c';
+      k.fillRect(4, 13, 112, 9);
+      k.fillStyle = '#8fe08f';
+      k.fillRect(4, 13, 112, 3);
+      k.fillStyle = '#3e8f5a';
+      k.fillRect(80, 0, 16, 14); k.fillRect(76, 6, 24, 8);
+      k.fillStyle = '#7c6a58';
+      k.fillRect(86, 12, 4, 6);
+    });
+    c.globalAlpha = 0.85;
+    c.drawImage(flaeche, x, y, 110, 73);
+    c.globalAlpha = 1;
+  });
+
+  wolken(0.42, 170, 150, 7, 0.9, 'wNah', '#ffffff', '#c7e4f7', 0.35);
+
+  // Wolkenmeer ganz unten, beim Start zu sehen
+  const unten = H - (s.kamera + H - 60) * 0.55;
+  if (unten - 80 < H) {
+    c.fillStyle = '#ffffff';
+    for (let i = -1; i < 8; i++) {
+      c.beginPath();
+      c.arc(i * 56 + (i % 2) * 18, unten - 40, 44 + (i % 3) * 8, 0, 6.3);
+      c.fill();
+    }
+    c.fillRect(0, unten - 40, B, 400);
+  }
+
+  // Sichtbare Windstreifen
+  if (s.wind && !wenigBewegung.matches) {
+    c.fillStyle = 'rgba(255,255,255,' + (0.14 + Math.abs(s.wind) * 0.36).toFixed(2) + ')';
+    for (let i = 0; i < 16; i++) {
+      const tempo = (200 + kachelWert(i, 61) * 260) * s.wind;
+      const x = ((kachelWert(i, 63) * B * 3 + s.zeit * tempo) % (B + 90) + B + 90) % (B + 90) - 45;
+      const y = kachelWert(i, 65) * H;
+      c.fillRect(x, y, 22 + Math.abs(s.wind) * 36, 1.5);
+    }
+  }
+}
+
+function malEisWelt(c) {
+  // Sterne
+  c.fillStyle = 'rgba(255,255,255,0.75)';
+  kacheln(c, 0.08, 40, (i, y) => {
+    for (let n = 0; n < 3; n++) {
+      if (kachelWert(i, n, 71) < 0.5) continue;
+      c.fillRect(kachelWert(i, n, 73) * B, y + kachelWert(i, n, 75) * 40, 1.6, 1.6);
+    }
+  });
+  // Polarlicht: wogende Bänder
+  {
+    for (let band = 0; band < 3; band++) {
+      c.fillStyle = ['rgba(90,255,190,0.26)', 'rgba(70,200,255,0.2)', 'rgba(170,120,255,0.18)'][band];
+      const basisY = 130 + band * 58 + (s.kamera * 0.02) % 80;
+      c.beginPath();
+      c.moveTo(0, basisY);
+      for (let x = 0; x <= B; x += 18) {
+        const welle = Math.sin(x * 0.018 + s.zeit * 0.5 + band) * 26 + Math.sin(x * 0.04 - s.zeit * 0.3) * 12;
+        c.lineTo(x, basisY + welle);
+      }
+      for (let x = B; x >= 0; x -= 18) {
+        const welle = Math.sin(x * 0.015 + s.zeit * 0.4 + band * 2) * 18;
+        c.lineTo(x, basisY + 118 + welle);
+      }
+      c.closePath();
+      c.fill();
+    }
+  }
+  // Berge in zwei Ebenen, die von unten immer wieder nachkommen
+  const berg = (tiefe, farbe, schnee, schluessel, seed) => {
+    kacheln(c, tiefe, 640, (i, y) => {
+      const flaeche = figur(schluessel, B, 280, k => {
+        const spitzen = [];
+        for (let n = 0; n < 5; n++) spitzen.push([n * 92 - 20 + kachelWert(n, seed) * 40, 40 + kachelWert(n, seed + 1) * 120]);
+        for (const [sx, hoch] of spitzen) {
+          k.fillStyle = farbe;
+          k.beginPath(); k.moveTo(sx - 110, 280); k.lineTo(sx, hoch); k.lineTo(sx + 110, 280); k.closePath(); k.fill();
+          k.fillStyle = schnee;
+          k.beginPath(); k.moveTo(sx, hoch); k.lineTo(sx + 24, hoch + 42); k.lineTo(sx + 8, hoch + 34); k.lineTo(sx - 4, hoch + 50); k.lineTo(sx - 12, hoch + 32); k.lineTo(sx - 24, hoch + 42); k.closePath(); k.fill();
+        }
+      });
+      c.drawImage(flaeche, 0, y, B, 280);
+      c.fillStyle = farbe;
+      c.fillRect(0, y + 279, B, 362);
+    });
+  };
+  c.globalAlpha = 0.9;
+  berg(0.2, '#1d3f5e', '#c8e6f2', 'bergFern', 81);
+  berg(0.36, '#142c47', '#e6f6fc', 'bergNah', 91);
+  c.globalAlpha = 1;
+  // Schneefall
+  c.fillStyle = 'rgba(255,255,255,0.75)';
+  for (let i = 0; i < 40; i++) {
+    const tempo = 30 + kachelWert(i, 97) * 60;
+    const x = (kachelWert(i, 99) * B + Math.sin(s.zeit + i) * 14 + B) % B;
+    const y = (kachelWert(i, 101) * H + s.zeit * (wenigBewegung.matches ? 0 : tempo) - s.kamera * 0.25) % H;
+    c.fillRect(x, (y + H) % H, 2, 2);
+  }
+}
+
+function malAllWelt(c) {
+  // Nebel im Hintergrund
+  kacheln(c, 0.1, 500, (i, y) => {
+    const farben = ['rgba(165,107,255,', 'rgba(255,90,170,', 'rgba(70,160,255,'];
+    const farbe = farben[(((i % 3) + 3) % 3)];
+    const x = kachelWert(i, 111) * B;
+    const verlauf = c.createRadialGradient(x, y, 10, x, y, 230);
+    verlauf.addColorStop(0, farbe + '0.24)');
+    verlauf.addColorStop(1, farbe + '0)');
+    c.fillStyle = verlauf;
+    c.fillRect(0, y - 230, B, 460);
+  });
+  // Sterne in zwei Tiefen, einige funkeln
+  kacheln(c, 0.06, 30, (i, y) => {
+    for (let n = 0; n < 3; n++) {
+      if (kachelWert(i, n, 121) < 0.45) continue;
+      const funkeln = wenigBewegung.matches ? 0.7 : 0.45 + Math.sin(s.zeit * (1 + kachelWert(i, n, 123) * 3) + i) * 0.4;
+      c.fillStyle = 'rgba(255,255,255,' + funkeln.toFixed(2) + ')';
+      const g = kachelWert(i, n, 125) > 0.86 ? 2.4 : 1.4;
+      c.fillRect(kachelWert(i, n, 127) * B, y + kachelWert(i, n, 129) * 30, g, g);
+    }
+  });
+  // Die Erde unten beim Start
+  const unten = H - (s.kamera + H - 60) * 0.42;
+  if (unten - 200 < H) {
+    const flaeche = figur('erde', B + 160, 340, k => {
+      k.save();
+      k.beginPath(); k.arc((B + 160) / 2, 340, 300, 0, 6.3); k.clip();
+      const meer = k.createLinearGradient(0, 40, 0, 340);
+      meer.addColorStop(0, '#62c3f2');
+      meer.addColorStop(1, '#154a9a');
+      k.fillStyle = meer;
+      k.fillRect(0, 0, B + 160, 340);
+      k.fillStyle = '#58b868';
+      for (let n = 0; n < 16; n++) {
+        const lx = kachelWert(n, 131) * (B + 160), ly = 60 + kachelWert(n, 133) * 270;
+        k.fillRect(lx, ly, 40 + kachelWert(n, 135) * 70, 14 + kachelWert(n, 137) * 24);
+        k.fillRect(lx + 12, ly - 8, 22 + kachelWert(n, 139) * 40, 9);
+      }
+      k.fillStyle = 'rgba(255,255,255,0.6)';
+      for (let n = 0; n < 12; n++) k.fillRect(kachelWert(n, 141) * (B + 160), 50 + kachelWert(n, 143) * 280, 34 + kachelWert(n, 145) * 50, 5);
+      k.restore();
+      k.strokeStyle = 'rgba(127,227,255,0.55)';
+      k.lineWidth = 3;
+      k.beginPath(); k.arc((B + 160) / 2, 340, 301, 0, 6.3); k.stroke();
+    });
+    c.drawImage(flaeche, -80, unten - 340, B + 160, 340);
+  }
+  // Planeten
+  kacheln(c, 0.2, 560, (i, y) => {
+    if (kachelWert(i, 151) < 0.45 || i > -1) return;
+    const art = Math.floor(kachelWert(i, 153) * 3);
+    const x = 40 + kachelWert(i, 155) * (B - 80);
+    const flaeche = figur('planet' + art, 150, 110, k => {
+      const farben = [['#f2b84b', '#b5692a'], ['#6fd2c8', '#2a6f8f'], ['#e77f7f', '#8a3c5a']][art];
+      const kugel = k.createRadialGradient(62, 40, 4, 75, 55, 38);
+      kugel.addColorStop(0, farben[0]);
+      kugel.addColorStop(1, farben[1]);
+      k.fillStyle = kugel;
+      k.beginPath(); k.arc(75, 55, 34, 0, 6.3); k.fill();
+      k.fillStyle = 'rgba(0,0,0,0.13)';
+      k.fillRect(44, 44, 62, 4); k.fillRect(42, 58, 66, 5); k.fillRect(48, 72, 54, 3);
+      if (art !== 1) {
+        k.strokeStyle = 'rgba(255,240,210,0.65)';
+        k.lineWidth = 3.5;
+        k.beginPath(); k.ellipse(75, 55, 66, 13, -0.3, 0, 6.3); k.stroke();
+      }
+    });
+    c.drawImage(flaeche, x - 75, y, 150, 110);
+  });
+}
+
+function malFlut(c) {
+  const sichtbar = s.flutY - s.kamera;
+  if (sichtbar > H + 30) return;
+  const w = s.gr.w;
+  const welle = x => Math.sin(x * 0.03 + s.zeit * 3) * 5 + Math.sin(x * 0.07 - s.zeit * 2) * 2.5;
+  c.save();
+  c.globalAlpha = 0.86;
+  const verlauf = c.createLinearGradient(0, sichtbar, 0, sichtbar + 180);
+  verlauf.addColorStop(0, w.flutFarbe);
+  verlauf.addColorStop(1, mische(w.flutFarbe, '#000000', 0.45));
+  c.fillStyle = verlauf;
+  c.beginPath();
+  c.moveTo(0, H + 10);
+  for (let x = 0; x <= B; x += 8) c.lineTo(x, sichtbar + welle(x));
+  c.lineTo(B, H + 10);
+  c.closePath();
+  c.fill();
+  c.restore();
+  c.fillStyle = w.flutHell;
+  for (let x = 0; x <= B; x += 8) c.fillRect(x, sichtbar + welle(x) - 1, 8, 2.5);
+}
+
+// --- Das ganze Bild ---
+
+function malZahlen(c) {
+  // Herzen links unten, Sterne und Höhenbalken am Rand
+  for (let i = 0; i < s.herzen; i++) malHerzForm(c, 18 + i * 19, H - 16, 1.05, '#ff5d73');
+
+  const anzeigeY = H - 16;
+  for (let i = 0; i < 3; i++) {
+    const x = B - 18 - (2 - i) * 21;
+    malSternFigur(c, x, anzeigeY, 8.5, 4);
+    c.fillStyle = i < s.sterneHier ? '#ffe28a' : 'rgba(255,255,255,0.22)';
+    c.fill();
+  }
+
+  // Der Höhenbalken zeigt, wie weit es noch bis zur Fahne ist
+  const balkenX = B - 9, oben = 16, unten = H - 44;
+  const gesamt = unten - oben;
+  const anteil = begrenzt(s.maxHoehe / -s.gr.zielY, 0, 1);
+  c.fillStyle = 'rgba(8,8,16,0.5)';
+  eckig(c, balkenX - 2.5, oben, 5, gesamt, 2.5); c.fill();
+  c.fillStyle = '#f2b84b';
+  eckig(c, balkenX - 2.5, unten - gesamt * anteil, 5, gesamt * anteil, 2.5); c.fill();
+  c.fillStyle = '#e5384f';
+  c.fillRect(balkenX - 4, oben - 2, 8, 5);
+  const jetzt = begrenzt(-s.p.y / -s.gr.zielY, 0, 1);
+  c.fillStyle = '#ffffff';
+  c.fillRect(balkenX - 4.5, unten - gesamt * jetzt - 1.5, 9, 3);
+}
+
+function zeichne() {
+  const c = pinsel;
+  const faktor = massstab * dichte;
+  c.setTransform(faktor, 0, 0, faktor, 0, 0);
+  if (!s.gr) return;
+  const nr = weltIndex(s.level);
+  c.save();
+  if (s.wackeln > 0 && !wenigBewegung.matches) c.translate((Math.random() - 0.5) * s.wackeln * 14, (Math.random() - 0.5) * s.wackeln * 14);
+  malHintergrund(c);
+
+  const sichtbar = y => y - s.kamera;
+  const imBild = (y, rand = 60) => y > s.kamera - rand && y < s.kamera + H + rand;
+
+  for (const pl of s.plattformen) {
+    if (pl.weg || !imBild(pl.y, 100)) continue;
+    malPlattform(c, pl, sichtbar(pl.y));
+  }
+  for (const l of s.laser) if (imBild(l.y)) malLaser(c, l, sichtbar(l.y));
+  for (const st of s.stacheln) if (imBild(st.y)) malStachel(c, st.x, sichtbar(st.y), st.phase, nr);
+  for (const m of s.muenzen) if (!m.weg && imBild(m.y)) malMuenze(c, m.x, sichtbar(m.y) + Math.sin(s.zeit * 2.4 + m.phase) * 2, s.zeit + m.phase);
+  for (const st of s.sterne) if (!st.weg && imBild(st.y)) malStern(c, st.x, sichtbar(st.y), s.zeit + st.phase);
+  for (const h of s.hilfen) if (!h.weg && imBild(h.y)) malHilfe(c, h.typ, h.x, sichtbar(h.y) + Math.sin(s.zeit * 3 + h.phase) * 3, 40);
+  for (const g of s.gegner) if (imBild(g.y)) malGegner(c, g, sichtbar(g.y), nr);
+  for (const f of s.faller) malFaller(c, f, sichtbar(f.y), nr);
+
+  // Warnzeichen für Dinge, die gleich von oben kommen
+  for (const w of s.warnungen) {
+    if (Math.floor(w.zeit * 8) % 2) continue;
+    c.fillStyle = '#ffd34a';
+    c.beginPath(); c.moveTo(w.x, 28); c.lineTo(w.x - 11, 8); c.lineTo(w.x + 11, 8); c.closePath(); c.fill();
+    c.fillStyle = '#14151a';
+    c.fillRect(w.x - 1.2, 10, 2.4, 8);
+    c.fillRect(w.x - 1.2, 19.5, 2.4, 2.4);
+  }
+
+  const p = s.p;
+  const spielerY = sichtbar(p.y);
+  malSpieler(c, p, spielerY, p.x);
+  // Beim Durchqueren des Randes ist die Figur auf beiden Seiten zu sehen
+  if (p.x < 22) malSpieler(c, p, spielerY, p.x + B + 2 * P_B);
+  if (p.x > B - 22) malSpieler(c, p, spielerY, p.x - B - 2 * P_B);
+
+  for (const f of s.funken) {
+    c.globalAlpha = Math.min(1, f.zeit * 3);
+    c.fillStyle = f.farbe;
+    c.fillRect(f.x - f.g / 2, sichtbar(f.y) - f.g / 2, f.g, f.g);
+  }
+  c.globalAlpha = 1;
+
+  malFlut(c);
+  c.restore();
+
+  for (const t of s.texte) textMitte(t.text, begrenzt(t.x, 60, B - 60), sichtbar(t.y), 9, t.farbe, Math.min(1, t.zeit * 2.5));
+
+  malZahlen(c);
+
+  if (s.intro > 0 && modus === 'lauf') {
+    const alpha = Math.min(1, s.intro * 1.5);
+    const def = s.gr.def;
+    textMitte(s.gr.w.name, B / 2, H * 0.26, 10, s.gr.w.farbe === '#d83bb0' ? '#ff8fe0' : '#ffffff', alpha);
+    textMitte('LEVEL ' + s.level, B / 2, H * 0.31, 17, '#ffe28a', alpha);
+    textMitte(grossName(def.name), B / 2, H * 0.36, 9, '#ffffff', alpha);
+    if (s.gr.flut) textMitte(grossName(s.gr.w.flut) + ' STEIGT!', B / 2, H * 0.41, 9, '#ff9d8a', alpha);
+    if (hatTouch && s.level <= 2) {
+      textMitte('HALTEN', B * 0.25, H * 0.75, 9, '#ffffff', alpha);
+      textMitte('HALTEN', B * 0.75, H * 0.75, 9, '#ffffff', alpha);
+      textMitte('<', B * 0.25, H * 0.7, 20, '#ffffff', alpha);
+      textMitte('>', B * 0.75, H * 0.7, 20, '#ffffff', alpha);
+    }
+  }
+  if (s.meldung) textMitte(s.meldung.text, B / 2, H * 0.16, 12, '#ffe28a', Math.min(1, s.meldung.zeit * 2));
+  if (s.abschluss && s.abschluss.art === 'ziel') textMitte('GESCHAFFT!', B / 2, H * 0.3, 21, '#ffe28a');
+}
+
+// --------------------------- Anzeige oben ---------------------------
+
+function naechstesZiel() {
+  const liste = daten.freunde.filter(f => f.stufe === daten.stufe).map(f => ({ name: grossName(f.name), punkte: f.punkte }));
+  liste.push({ name: 'REKORD', punkte: s.rekordAmStart });
+  const offen = liste.filter(z => z.punkte > s.punkte).sort((a, b) => a.punkte - b.punkte);
+  return offen[0] || { name: 'REKORD', punkte: Math.max(s.punkte, s.rekordAmStart) };
+}
+
+let hudStand = '';
+function zeigeHud() {
+  const ziel = naechstesZiel();
+  const stand = [s.punkte, s.level, ziel.name, ziel.punkte].join('|');
+  if (stand === hudStand) return;
+  hudStand = stand;
+  $('punkte').textContent = zahlKurz(s.punkte);
+  $('levelAnzeige').textContent = s.level;
+  $('zielName').textContent = Array.from(ziel.name).slice(0, 9).join('');
+  $('zielWert').textContent = zahlKurz(ziel.punkte);
+}
+
+// --------------------------- Hauptschleife ---------------------------
+
+let letzteZeit = 0, vorrat = 0;
+function bildAufbau(zeit) {
+  const dt = Math.min((zeit - letzteZeit) / 1000, 0.05);
+  letzteZeit = zeit;
+  if (modus === 'lauf') {
+    vorrat += dt;
+    while (vorrat >= TAKT && modus === 'lauf') { schritt(TAKT); vorrat -= TAKT; }
+    if (modus !== 'lauf') vorrat = 0;
+  }
+  zeichne();
+  zeigeHud();
+  requestAnimationFrame(bildAufbau);
+}
+
+// --------------------------- Größe ---------------------------
+
+function passeGroesseAn() {
+  const feld = $('feld');
+  const platzB = feld.clientWidth, platzH = feld.clientHeight;
+  if (!platzB || !platzH) return;
+  // Die Breite ist fest, die Höhe richtet sich nach dem Bildschirm: So bleibt nie ein Rand übrig.
+  const altH = H;
+  H = begrenzt(Math.round(B * platzH / platzB), H_MIN, H_MAX);
+  const neu = Math.min(platzB / B, platzH / H);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  bild.style.width = Math.floor(B * neu) + 'px';
+  bild.style.height = Math.floor(H * neu) + 'px';
+  bild.width = Math.floor(B * neu * dpr);
+  bild.height = Math.floor(H * neu * dpr);
+  massstab = neu;
+  dichte = dpr;
+  figuren.clear();
+  hintergrundCache = null;
+  // Solange noch niemand losgesprungen ist, bleibt der Boden unten sichtbar
+  if (s.gr && altH !== H && s.maxHoehe < 1) s.kamera = -H + 60;
+  zeichne();
+}
+
+// --------------------------- Eingabe ---------------------------
+
+const tasten = { links: false, rechts: false };
+const hatTouch = matchMedia('(pointer: coarse)').matches;
+const finger = [];
+let mausX = null;
+
+function fingerRichtung(e) {
+  const rect = bild.getBoundingClientRect();
+  return e.clientX < rect.left + rect.width / 2 ? -1 : 1;
+}
+
+window.addEventListener('pointerdown', e => {
+  ton.an();
+  if (modus !== 'lauf' || e.target.closest('button, a, input')) return;
+  if (e.pointerType === 'mouse') return;
+  finger.push({ id: e.pointerId, richtung: fingerRichtung(e) });
+});
+
+window.addEventListener('pointermove', e => {
+  if (modus !== 'lauf') return;
+  if (e.pointerType === 'mouse') {
+    const rect = bild.getBoundingClientRect();
+    mausX = (e.clientX - rect.left) / massstab;
+    return;
+  }
+  const f = finger.find(x => x.id === e.pointerId);
+  if (f) f.richtung = fingerRichtung(e);
+});
+
+function fingerWeg(e) {
+  const stelle = finger.findIndex(x => x.id === e.pointerId);
+  if (stelle >= 0) finger.splice(stelle, 1);
+}
+window.addEventListener('pointerup', fingerWeg);
+window.addEventListener('pointercancel', fingerWeg);
+
+window.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  const taste = e.key.toLowerCase();
+  if (taste === 'arrowleft' || taste === 'a') { tasten.links = true; mausX = null; e.preventDefault(); }
+  if (taste === 'arrowright' || taste === 'd') { tasten.rechts = true; mausX = null; e.preventDefault(); }
+  if (taste === 'm' && !e.repeat) schalteTon();
+  if ((taste === 'p' || taste === 'escape') && !e.repeat) {
+    if (modus === 'lauf') pausiere();
+    else if (!$('fPause').hidden) weiter();
+  }
+});
+window.addEventListener('keyup', e => {
+  const taste = e.key.toLowerCase();
+  if (taste === 'arrowleft' || taste === 'a') tasten.links = false;
+  if (taste === 'arrowright' || taste === 'd') tasten.rechts = false;
+});
+window.addEventListener('blur', () => { tasten.links = tasten.rechts = false; finger.length = 0; pausiere(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) pausiere(); });
+
+// --------------------------- Fenster ---------------------------
+
+const FENSTER = ['fStart', 'fLevels', 'fFiguren', 'fListe', 'fHilfe', 'fPause', 'fGeschafft', 'fEnde', 'fTeilen'];
+let vorTeilen = 'fStart';
+
+function zeigeFenster(name) {
+  modus = 'fenster';
+  finger.length = 0;
+  document.activeElement && document.activeElement.blur();
+  $('fenster').hidden = false;
+  for (const f of FENSTER) $(f).hidden = f !== name;
+  $('fenster').scrollTop = 0;
+  if (name === 'fStart') baueStart();
+  if (name === 'fLevels') baueLevels();
+  if (name === 'fFiguren') baueFiguren();
+  if (name === 'fListe') baueListe();
+  if (!hatTouch) {
+    const knopf = $(name).querySelector('.btn.main, .btn');
+    if (knopf) knopf.focus({ preventScroll: true });
+  }
+}
+
+function schliesseFenster() {
+  $('fenster').hidden = true;
+  modus = 'lauf';
+  mausX = null;
+  document.activeElement && document.activeElement.blur();
+  letzteZeit = performance.now();
+  vorrat = 0;
+}
+
+function baueStufenKnoepfe() {
+  for (const gruppe of document.querySelectorAll('.stufen')) {
+    gruppe.textContent = '';
+    for (const [schluessel, stufe] of Object.entries(STUFEN)) {
+      const k = document.createElement('button');
+      k.type = 'button';
+      k.textContent = stufe.name;
+      k.dataset.stufe = schluessel;
+      k.addEventListener('click', () => waehleStufe(schluessel));
+      gruppe.append(k);
+    }
+  }
+}
+
+function waehleStufe(schluessel) {
+  daten.stufe = schluessel;
+  speichere();
+  s = neuerZustand(1);
+  ladeLevel(1);
+  zeigeStufe();
+  if (!$('fStart').hidden) baueStart();
+  if (!$('fLevels').hidden) baueLevels();
+  if (!$('fListe').hidden) baueListe();
+}
+
+function zeigeStufe() {
+  for (const k of document.querySelectorAll('.stufen button')) {
+    k.setAttribute('aria-pressed', String(k.dataset.stufe === daten.stufe));
+  }
+  for (const t of document.querySelectorAll('.js-stufentext')) t.textContent = STUFEN[daten.stufe].text;
+  for (const t of document.querySelectorAll('.js-rekord')) t.textContent = zahl(fortschritt().rekord);
+}
+
+let offenesDuell = null;
+
+function baueStart() {
+  zeigeStufe();
+  const f = fortschritt();
+  const duell = offenesDuell && offenesDuell.stufe === daten.stufe ? offenesDuell : null;
+  $('duell').hidden = !offenesDuell;
+  if (offenesDuell) {
+    $('duellTitel').textContent = grossName(offenesDuell.name) + ' FORDERT DICH HERAUS';
+    $('duellText').textContent = zahl(offenesDuell.punkte) + ' Punkte bis Level ' + offenesDuell.level + ' auf Stufe ' + STUFEN[offenesDuell.stufe].name + '. Schaffst du mehr?';
+  }
+  $('losKnopf').textContent = duell ? 'Herausforderung annehmen' : f.frei > 1 ? 'Weiter ab Level ' + f.frei : 'Spielen';
+  $('losKnopf').dataset.level = duell ? 1 : f.frei;
+}
+
+function baueLevels() {
+  zeigeStufe();
+  const liste = $('levelListe');
+  liste.textContent = '';
+  const f = fortschritt();
+  for (let w = 0; w < WELTEN.length; w++) {
+    const kopf = document.createElement('p');
+    kopf.className = 'welt';
+    const punkt = document.createElement('i');
+    punkt.style.background = WELTEN[w].farbe;
+    kopf.append(punkt, WELTEN[w].name);
+    liste.append(kopf);
+    const raster = document.createElement('div');
+    raster.className = 'raster';
+    for (let i = 0; i < 6; i++) {
+      const nr = w * 6 + i + 1;
+      const k = document.createElement('button');
+      k.type = 'button';
+      k.className = 'feldchen' + (nr === f.frei ? ' aktuell' : '');
+      k.disabled = nr > f.frei;
+      const anzahl = f.sterne[nr] || 0;
+      k.setAttribute('aria-label', 'Level ' + nr + ' ' + LEVEL[nr - 1].name + (k.disabled ? ', noch gesperrt' : ', ' + anzahl + ' von 3 Sternen'));
+      const zahlText = document.createElement('span');
+      zahlText.textContent = nr;
+      const mini = document.createElement('span');
+      mini.className = 'ministerne';
+      for (let n = 0; n < 3; n++) mini.append(sternBild(n < anzahl));
+      k.append(zahlText, mini);
+      k.addEventListener('click', () => starte(nr));
+      raster.append(k);
+    }
+    liste.append(raster);
+  }
+}
+
+function sternBild(an) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', '#stern');
+  svg.append(use);
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  if (an) svg.setAttribute('class', 'an');
+  return svg;
+}
+
+function baueFiguren() {
+  const sterne = sterneGesamt();
+  const gesamt = LEVEL.length * 3;
+  $('figurenText').textContent = 'Du hast ' + sterne + ' von ' + gesamt + ' Sternen. Jede Figur spielt sich gleich, sie sieht nur anders aus.';
+  const liste = $('figurenListe');
+  liste.textContent = '';
+  for (const [name, def] of Object.entries(FIGUREN)) {
+    const k = document.createElement('button');
+    k.type = 'button';
+    k.className = 'figurKnopf';
+    const frei = sterne >= def.sterne;
+    k.disabled = !frei;
+    k.setAttribute('aria-pressed', String(daten.figur === name));
+    const leinwand = document.createElement('canvas');
+    leinwand.width = leinwand.height = 16;
+    leinwand.getContext('2d').drawImage(figurBild(name, false), 0, 0);
+    const titel = document.createElement('span');
+    titel.textContent = def.name;
+    const info = document.createElement('small');
+    if (frei) info.textContent = daten.figur === name ? 'GEWÄHLT' : 'FREI';
+    else info.append(sternBild(true), String(def.sterne));
+    k.setAttribute('aria-label', def.name + (frei ? '' : ', braucht ' + def.sterne + ' Sterne'));
+    k.append(leinwand, titel, info);
+    k.addEventListener('click', () => {
+      daten.figur = name;
+      speichere();
+      baueFiguren();
+    });
+    liste.append(k);
+  }
+}
+
+function baueListe() {
+  zeigeStufe();
+  const liste = $('liste');
+  liste.textContent = '';
+  const f = fortschritt();
+  const eintraege = daten.freunde.filter(x => x.stufe === daten.stufe).map(x => ({ name: x.name, punkte: x.punkte, freund: x }));
+  eintraege.push({ name: daten.name ? daten.name + ' (du)' : 'Du', punkte: f.rekord, ich: true });
+  eintraege.sort((a, b) => b.punkte - a.punkte);
+  eintraege.forEach((e, i) => {
+    const zeile = document.createElement('li');
+    if (e.ich) zeile.className = 'ich';
+    const platz = document.createElement('span');
+    platz.className = 'platz';
+    platz.textContent = i + 1;
+    const wer = document.createElement('span');
+    wer.className = 'wer';
+    wer.textContent = e.name;
+    const wie = document.createElement('span');
+    wie.className = 'wie';
+    wie.textContent = zahl(e.punkte);
+    zeile.append(platz, wer, wie);
+    if (e.freund) {
+      const weg = document.createElement('button');
+      weg.type = 'button';
+      weg.className = 'weg';
+      weg.textContent = '×';
+      weg.setAttribute('aria-label', e.name + ' aus der Liste entfernen');
+      weg.addEventListener('click', () => {
+        daten.freunde = daten.freunde.filter(x => x !== e.freund);
+        speichere();
+        baueListe();
+      });
+      zeile.append(weg);
+    } else {
+      const platzhalter = document.createElement('span');
+      platzhalter.className = 'platzhalter';
+      zeile.append(platzhalter);
+    }
+    liste.append(zeile);
+  });
+  $('listeTeilen').hidden = f.rekord <= 0;
+}
+
+function starte(levelNr) {
+  ton.an();
+  offenesDuell = null;
+  s = neuerZustand(levelNr);
+  ladeLevel(levelNr);
+  hudStand = '';
+  schliesseFenster();
+}
+
+function pausiere() {
+  if (modus !== 'lauf' || s.abschluss) return;
+  merkeRekord();
+  $('pausePunkte').textContent = zahl(s.punkte);
+  zeigeFenster('fPause');
+}
+
+function weiter() { schliesseFenster(); }
+
+function zeigeGeschafft() {
+  const sterne = $('geschafftSterne');
+  sterne.textContent = '';
+  sterne.setAttribute('aria-label', s.sterneHier + ' von 3 Sternen');
+  for (let i = 0; i < 3; i++) sterne.append(sternBild(i < s.sterneHier));
+  $('geschafftTitel').textContent = 'LEVEL ' + s.level + ' GESCHAFFT';
+  $('gMuenzen').textContent = s.muenzenHier + ' / ' + s.gr.muenzenGesamt;
+  $('gZeit').textContent = zeitText(s.levelZeit);
+  $('gBonus').textContent = '+' + zahl(s.bonusText);
+  $('gPunkte').textContent = zahl(s.punkte);
+  $('gFrei').hidden = !s.neuFrei.length;
+  if (s.neuFrei.length) $('gFrei').textContent = 'NEUE FIGUR: ' + grossName(FIGUREN[s.neuFrei[0]].name);
+  let tipp = '';
+  if (s.sterneHier < 3) tipp = 'Noch ' + (3 - s.sterneHier) + (s.sterneHier === 2 ? ' Stern' : ' Sterne') + ' verpasst. Du kannst jedes Level jederzeit noch einmal spielen.';
+  if (s.level % 6 === 0 && s.level % LEVEL.length !== 0) tipp = 'Welt geschafft! Als Nächstes kommst du nach ' + welt(s.level + 1).name + ', mit vollen Herzen.';
+  if (s.level % LEVEL.length === 0) tipp = 'Du bist ganz oben angekommen! Ab jetzt geht es von vorn weiter, nur mit mehr Hindernissen.';
+  $('gTipp').textContent = tipp;
+  $('gTipp').hidden = !tipp;
+  const naechstes = LEVEL[kartenIndex(s.level + 1)];
+  $('naechstesKnopf').textContent = 'Level ' + (s.level + 1) + ': ' + naechstes.name;
+  zeigeFenster('fGeschafft');
+}
+
+function zeigeEnde() {
+  merkeRekord();
+  const f = fortschritt();
+  const neu = s.punkte > s.rekordAmStart && s.punkte > 0;
+  $('neuerRekord').hidden = !neu;
+  $('ePunkte').textContent = zahl(s.punkte);
+  $('eLevel').textContent = s.level;
+  $('eRekord').textContent = zahl(f.rekord);
+
+  // Was bringt mich zurück ans Spiel? Der nächste Freund oder der eigene Rekord
+  const freunde = daten.freunde.filter(x => x.stufe === daten.stufe);
+  const ueber = freunde.filter(x => x.punkte > s.punkte).sort((a, b) => a.punkte - b.punkte)[0];
+  const eDuell = $('eDuell');
+  eDuell.hidden = false;
+  if (ueber) eDuell.textContent = 'Noch ' + zahl(ueber.punkte - s.punkte + 1) + ' Punkte, dann liegst du vor ' + ueber.name + '.';
+  else if (freunde.length) eDuell.textContent = 'Du liegst vor allen Freunden in deiner Liste. Schick ihnen deinen Link, damit sie nachlegen.';
+  else if (!neu && f.rekord > s.punkte) eDuell.textContent = 'Noch ' + zahl(f.rekord - s.punkte + 1) + ' Punkte bis zu deinem Rekord.';
+  else eDuell.textContent = 'Schick deinen Rekord an Freunde. Wer schlägt dich?';
+
+  const weiterAb = s.level;
+  $('nochmalKnopf').textContent = weiterAb > 1 ? 'Weiter ab Level ' + Math.min(weiterAb, LEVEL.length) : 'Nochmal';
+  $('nochmalKnopf').dataset.level = Math.min(weiterAb, LEVEL.length);
+  $('neuKnopf').hidden = weiterAb <= 1;
+  $('endeTeilen').hidden = f.rekord <= 0;
+  zeigeFenster('fEnde');
+}
+
+// --------------------------- Freunde herausfordern ---------------------------
+
+function reinerName(text) {
+  // Nur sichtbare Zeichen und nicht zu lang: Der Name kommt aus einem fremden Link
+  const sauber = String(text == null ? '' : text).normalize('NFC').replace(/[\p{C}<>]/gu, '').trim();
+  return Array.from(sauber).slice(0, 12).join('');
+}
+
+function linkBauen() {
+  const f = fortschritt();
+  const teile = new URLSearchParams({
+    name: reinerName($('nameFeld').value) || 'Ein Freund',
+    punkte: f.rekord,
+    level: f.rekordLevel || 1,
+    stufe: daten.stufe
+  });
+  return SPIEL_ADRESSE + '#' + teile.toString();
+}
+
+function oeffneTeilen(zurueck) {
+  vorTeilen = zurueck;
+  const f = fortschritt();
+  $('nameFeld').value = daten.name;
+  $('teilenStatus').textContent = '';
+  $('linkFeld').hidden = true;
+  $('teilenText').textContent = 'Du teilst deinen Rekord: ' + zahl(f.rekord) + ' Punkte auf Stufe ' + STUFEN[daten.stufe].name + '. Wer den Link öffnet, sieht dein Ergebnis und kann es angreifen.';
+  zeigeFenster('fTeilen');
+}
+
+async function teile() {
+  const f = fortschritt();
+  daten.name = reinerName($('nameFeld').value);
+  speichere();
+  const adresse = linkBauen();
+  const text = 'Ich habe ' + zahl(f.rekord) + ' Punkte in Wolkenhüpfer (Level ' + (f.rekordLevel || 1) + ', Stufe ' + STUFEN[daten.stufe].name + '). Schaffst du mehr?';
+  const status = $('teilenStatus');
+  status.textContent = '';
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: 'Wolkenhüpfer', text, url: adresse });
+      return;
+    }
+    await navigator.clipboard.writeText(text + ' ' + adresse);
+    status.textContent = 'Link kopiert! Füge ihn jetzt im Chat ein.';
+  } catch (error) {
+    if (error.name === 'AbortError') return;       // Teilen wurde selbst abgebrochen
+    const feld = $('linkFeld');
+    feld.value = adresse;
+    feld.hidden = false;
+    feld.select();
+    status.textContent = 'Kopiere diesen Link:';
+  }
+}
+
+// Wurde das Spiel über den Link eines Freundes geöffnet?
+function leseHerausforderung() {
+  if (location.hash.length < 2) return;
+  const teile = new URLSearchParams(location.hash.slice(1));
+  const name = reinerName(teile.get('name'));
+  const punkte = Number(teile.get('punkte'));
+  const level = Number(teile.get('level'));
+  const stufe = teile.get('stufe');
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (error) {}
+  if (!name || !Number.isInteger(punkte) || punkte < 1 || punkte > 99999999) return;
+  if (!Number.isInteger(level) || level < 1 || level > 9999) return;
+  if (!Object.prototype.hasOwnProperty.call(STUFEN, stufe)) return;
+
+  const bekannt = daten.freunde.find(f => f.name === name && f.stufe === stufe);
+  if (bekannt) bekannt.punkte = Math.max(bekannt.punkte, punkte);
+  else daten.freunde.push({ name, punkte, level, stufe });
+  daten.freunde.sort((a, b) => b.punkte - a.punkte);
+  daten.freunde = daten.freunde.slice(0, 30);
+  daten.stufe = stufe;
+  speichere();
+  offenesDuell = { name, punkte, level, stufe };
+}
+
+// --------------------------- Knöpfe ---------------------------
+
+function schalteTon() {
+  daten.ton = !daten.ton;
+  speichere();
+  zeigeTon();
+  ton.an();
+  ton.sprung();
+}
+function zeigeTon() {
+  $('tonKnopf').classList.toggle('stumm', !daten.ton);
+  $('tonKnopf').setAttribute('aria-label', daten.ton ? 'Ton ausschalten' : 'Ton einschalten');
+}
+
+function zumMenue() {
+  merkeRekord();
+  s = neuerZustand(1);
+  ladeLevel(1);
+  hudStand = '';
+  zeigeFenster('fStart');
+}
+
+for (const k of document.querySelectorAll('[data-oeffne]')) {
+  k.addEventListener('click', () => {
+    if (k.dataset.oeffne === 'fStart' && !$('fEnde').hidden) { zumMenue(); return; }
+    zeigeFenster(k.dataset.oeffne);
+  });
+}
+$('losKnopf').addEventListener('click', e => starte(Number(e.currentTarget.dataset.level) || 1));
+$('tonKnopf').addEventListener('click', schalteTon);
+$('pauseKnopf').addEventListener('click', () => { ton.an(); pausiere(); });
+$('weiterKnopf').addEventListener('click', weiter);
+$('pauseNeu').addEventListener('click', () => {
+  // Punkte aus dem abgebrochenen Versuch zählen nicht weiter, sonst könnte man sie endlos sammeln
+  merkeRekord();
+  starte(s.level);
+});
+$('pauseMenue').addEventListener('click', zumMenue);
+$('geschafftMenue').addEventListener('click', zumMenue);
+$('naechstesKnopf').addEventListener('click', () => {
+  ladeLevel(s.level + 1);
+  // Eine neue Welt beginnt mit vollen Herzen
+  if (kartenIndex(s.level) % 6 === 0) s.herzen = Math.max(s.herzen, s.stufe.herzen);
+  schliesseFenster();
+});
+$('nochmalKnopf').addEventListener('click', e => starte(Number(e.currentTarget.dataset.level) || 1));
+$('neuKnopf').addEventListener('click', () => starte(1));
+$('endeTeilen').addEventListener('click', () => oeffneTeilen('fEnde'));
+$('listeTeilen').addEventListener('click', () => oeffneTeilen('fListe'));
+$('teilenKnopf').addEventListener('click', teile);
+$('teilenZurueck').addEventListener('click', () => zeigeFenster(vorTeilen));
+
+// --------------------------- Start ---------------------------
+
+function baueLegende() {
+  const hilfen = $('legendeHilfen');
+  for (const [typ, def] of Object.entries(HILFEN)) {
+    const zeile = document.createElement('li');
+    const leinwand = document.createElement('canvas');
+    leinwand.width = leinwand.height = 84;
+    const k = leinwand.getContext('2d');
+    malHilfe(k, typ, 42, 42, 84);
+    const text = document.createElement('span');
+    text.textContent = def.text;
+    zeile.append(leinwand, text);
+    hilfen.append(zeile);
+  }
+  const gefahren = $('legendeGefahren');
+  const eintraege = [
+    ['Gegner: von oben plattspringen', k => { k.imageSmoothingEnabled = false; k.drawImage(gegnerBild(0, 0, false), 2, 12, 80, 60); }],
+    ['Stachel: niemals berühren', k => { k.save(); k.translate(42, 42); k.scale(1.7, 1.7); k.fillStyle = '#7a5a8c'; for (let i = 0; i < 8; i++) { k.rotate(Math.PI / 4); k.beginPath(); k.moveTo(-4.5, -10); k.lineTo(0, -20); k.lineTo(4.5, -10); k.closePath(); k.fill(); } k.fillStyle = '#3c2f4a'; k.beginPath(); k.arc(0, 0, 12, 0, 6.3); k.fill(); k.restore(); }],
+    ['Laser: warte, bis er aus ist', k => { k.fillStyle = '#ff3f6a'; k.fillRect(0, 32, 84, 20); k.fillStyle = '#ffffff'; k.fillRect(0, 39, 84, 6); }],
+    ['Warnzeichen: gleich fällt etwas', k => { k.fillStyle = '#ffd34a'; k.beginPath(); k.moveTo(42, 78); k.lineTo(4, 10); k.lineTo(80, 10); k.closePath(); k.fill(); k.fillStyle = '#14151a'; k.fillRect(38, 20, 8, 28); k.fillRect(38, 53, 8, 8); }]
+  ];
+  for (const [text, malen] of eintraege) {
+    const zeile = document.createElement('li');
+    const leinwand = document.createElement('canvas');
+    leinwand.width = leinwand.height = 84;
+    malen(leinwand.getContext('2d'));
+    const span = document.createElement('span');
+    span.textContent = text;
+    zeile.append(leinwand, span);
+    gefahren.append(zeile);
+  }
+  const weltenListe = $('weltenListe');
+  for (const w of WELTEN) {
+    const zeile = document.createElement('li');
+    const inhalt = document.createElement('span');
+    const fett = document.createElement('strong');
+    fett.textContent = w.name.charAt(0) + w.name.slice(1).toLocaleLowerCase('de-DE') + ': ';
+    inhalt.append(fett, w.text);
+    zeile.append(inhalt);
+    weltenListe.append(zeile);
+  }
+  $('hilfeSteuerung').textContent = hatTouch
+    ? 'Halte die linke oder rechte Bildschirmhälfte gedrückt, um in diese Richtung zu lenken.'
+    : 'Pfeiltasten, A und D oder einfach die Maus lenken die Figur. P ist Pause, M ist Ton.';
+}
+
+leseHerausforderung();
+s = neuerZustand(1);
+ladeLevel(1);
+baueStufenKnoepfe();
+baueLegende();
+zeigeTon();
+zeigeFenster('fStart');
+new ResizeObserver(passeGroesseAn).observe($('feld'));
+passeGroesseAn();
+s.kamera = -H + 60;
+if (document.fonts && document.fonts.load) document.fonts.load('10px "Press Start 2P"');
+requestAnimationFrame(zeit => { letzteZeit = zeit; bildAufbau(zeit); });
+
+if ('serviceWorker' in navigator && window.isSecureContext && location.protocol !== 'file:') {
+  navigator.serviceWorker.register('sw.js').catch(() => { /* Das Spiel läuft auch so */ });
+}
+</script>
+</body>
+</html>
